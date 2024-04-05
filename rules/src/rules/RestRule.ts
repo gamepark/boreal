@@ -14,7 +14,7 @@ export class RestRule extends PlayerTurnRule {
     return [
       this.explorationToken.moveItem((item) => ({
         ...item.location,
-        x: item.location.x! + wonCompass
+        x: Math.max(8, item.location.x! + wonCompass)
       }))
     ]
 
