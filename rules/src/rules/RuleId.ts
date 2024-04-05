@@ -1,3 +1,9 @@
 export enum RuleId {
-  PlayerTurn = 1
+  Explore = 1,
+  Rest,
+  Reserve,
+  Remove,
+  InvertBoard,
+  InvertPyramid,
+  Pick
 }

@@ -1,30 +1,37 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { PlayerColor } from '@gamepark/game-template/PlayerColor'
-import { PlayerPanel, usePlayers } from '@gamepark/react-game'
+import { BorealRules } from '@gamepark/boreal/BorealRules'
+import { StyledPlayerPanel, usePlayerId, usePlayers, useRules } from '@gamepark/react-game'
 import { FC } from 'react'
+import { createPortal } from 'react-dom'
 
 export const PlayerPanels: FC<any> = () => {
+  const playerId = usePlayerId()
+  const rules = useRules<BorealRules>()!
   const players = usePlayers({ sortFromMe: true })
-  return (
+  const root = document.getElementById('root')
+  if (!root) {
+    return null
+  }
+
+  return createPortal(
     <>
-      {players.map((player, index) =>
-        <PlayerPanel key={player.id} playerId={player.id} color={playerColorCode[player.id]} css={panelPosition(index)}/>
+      {players.map((player) =>
+        <StyledPlayerPanel key={player.id} player={player} css={[panelPosition, player.id === (playerId ?? rules.players[0])? leftPosition: rightPosition ]}/>
       )}
-    </>
+    </>,
+    root
   )
 }
-const panelPosition = (index: number) => css`
+const panelPosition = css`
   position: absolute;
-  right: 1em;
-  top: ${8.5 + index * 16}em;
-  width: 28em;
-  height: 14em;
+  top: 8.5em;
 `
 
-export const playerColorCode: Record<PlayerColor, string> = {
-  [PlayerColor.Red]: 'red',
-  [PlayerColor.Blue]: 'blue',
-  [PlayerColor.Green]: 'green',
-  [PlayerColor.Yellow]: 'yellow'
-}
+const leftPosition = css`
+left: 1em;
+`
+
+const rightPosition = css`
+right: 1em;
+`
