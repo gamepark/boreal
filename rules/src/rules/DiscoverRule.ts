@@ -3,6 +3,7 @@ import { Descriptions } from '../material/CardDescription'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { PlayerColor } from '../PlayerColor'
+import { BoardHelper } from './helper/BoardHelper'
 import { PyramidHelper } from './helper/PyramidHelper'
 import { RuleId } from './RuleId'
 
@@ -19,10 +20,8 @@ export class DiscoverRule extends PlayerTurnRule {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.Pyramid) return []
     const item = this.material(MaterialType.Card).getItem(move.itemIndex)!
     const cost = Descriptions[item.id.front].cost ?? 0
-    const moves: MaterialMove[] = []
     if (!cost) {
-      moves.push(this.rules().startPlayerTurn(RuleId.Explore, this.nextPlayer))
-      return moves
+      return this.goNext(move)
     }
     return [
       this
@@ -36,10 +35,23 @@ export class DiscoverRule extends PlayerTurnRule {
     ]
   }
 
-  goNext(_move: MoveItem) {
+  goNext(_move: MoveItem): MaterialMove[] {
+    if (this.isOnePyramidCompleted && this.player === PlayerColor.Black) {
+      return [
+        this.rules().endGame()
+      ]
+    }
+
     return [
-      this.rules().startRule(RuleId.Rest)
+      this.rules().startRule(RuleId.Rest),
+      ...new BoardHelper(this.game).refillBoardMoves,
     ]
+  }
+
+  get isOnePyramidCompleted() {
+    return this.game.players.some((p) =>
+      this.material(MaterialType.Card).location(LocationType.Pyramid).player(p).length === 10
+    )
   }
 
   getPlaceMoves(cards: Material) {

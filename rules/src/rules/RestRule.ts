@@ -1,4 +1,4 @@
-import { PlayerTurnRule } from '@gamepark/rules-api'
+import { MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import sum from 'lodash/sum'
 import { Descriptions } from '../material/CardDescription'
 import { LocationType } from '../material/LocationType'
@@ -9,21 +9,28 @@ export class RestRule extends PlayerTurnRule {
   onRuleStart() {
     const wonCompass = this.wonCompass
 
-    if (!wonCompass) return [this.rules().startPlayerTurn(RuleId.Explore, this.nextPlayer)]
+    const moves: MaterialMove[] = []
+    if (wonCompass) {
+      moves.push(
+        this.explorationToken.moveItem((item) => ({
+          ...item.location,
+          x: Math.min(8, item.location.x! + wonCompass)
+        }))
+      )
+    }
 
-    return [
-      this.explorationToken.moveItem((item) => ({
-        ...item.location,
-        x: Math.max(8, item.location.x! + wonCompass)
-      }))
-    ]
+    moves.push(
+      this.rules().startPlayerTurn(RuleId.Explore, this.nextPlayer)
+    )
 
+    return moves
   }
 
   get wonCompass() {
     const nonCoveredCards = this.nonCoveredPyramidCards
     let wonCompass = sum(nonCoveredCards.getItems().map((item) => Descriptions[item.id.front]?.restBonus ?? 0))
     const compass = this.compass
+    if (compass === 8) return 0
     if (compass < 2) {
       wonCompass += 2 - compass
     }

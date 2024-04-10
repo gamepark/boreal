@@ -28,7 +28,8 @@ export class BorealRules extends SecretMaterialRules<PlayerColor, MaterialType, 
   locationsStrategies = {
     [MaterialType.Card]: {
       [LocationType.Deck]: new PositiveSequenceStrategy(),
-      [LocationType.BoardCard]: new FillGapStrategy()
+      [LocationType.BoardCard]: new FillGapStrategy(),
+      [LocationType.Reserve]: new PositiveSequenceStrategy()
     }
   }
 }

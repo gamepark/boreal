@@ -14,19 +14,18 @@ export class PyramidDescription extends LocationDescription {
   borderRadius = borealCardDescription.borderRadius
 
   getLocations(context: MaterialContext) {
-    const { rules} = context
+    const { rules, player } = context
 
     const locations: Location[] = []
-    for (const player of rules.players ) {
-      const pyramidHelper = new PyramidHelper(rules.game, player)
-      locations.push(
-        ...pyramidHelper.availableSpaces.flatMap((s) => ({
-          type: LocationType.Pyramid,
-          player: player,
-          ...s
-        }))
-      )
-    }
+    if (!player) return locations
+    const pyramidHelper = new PyramidHelper(rules.game, player)
+    locations.push(
+      ...pyramidHelper.availableSpaces.flatMap((s) => ({
+        type: LocationType.Pyramid,
+        player: player,
+        ...s
+      }))
+    )
 
     return locations
   }
@@ -34,7 +33,7 @@ export class PyramidDescription extends LocationDescription {
   alwaysVisible = true
 
   extraCss = css`
-    border: 0.05em solid black;
+    border: 0.05em solid white;
   `
 
   getCoordinates(location: Location, context: LocationContext) {
@@ -44,7 +43,7 @@ export class PyramidDescription extends LocationDescription {
   getPyramidSpaceCoordinates(location: Location, context: MaterialContext) {
     const { player, rules } = context
     const itsFirst = location.player === (player ?? rules.players[0])
-    const baseCoordinates = { x: itsFirst? -25: 25, y: 20, z: 0 }
+    const baseCoordinates = { x: itsFirst ? -21 : 20, y: 17, z: 0 }
     const baseline = rules.material(MaterialType.Card).location((l) => l.type === LocationType.Pyramid && l.player === location.player && l.y === 0)
     const minX = baseline.minBy((item) => item.location.x!).getItem()?.location.x
     const maxX = baseline.maxBy((item) => item.location.x!).getItem()?.location.x
@@ -59,8 +58,8 @@ export class PyramidDescription extends LocationDescription {
     return baseCoordinates
   }
 
-  getCardIndex (minX: number | undefined, maxX: number | undefined, x: number, y: number) {
+  getCardIndex(minX: number | undefined, maxX: number | undefined, x: number, y: number) {
     if (minX === undefined || maxX === undefined) return 0
-    return range(minX, maxX + (y === 0? 2: 1)).indexOf(x)
+    return range(minX, maxX + (y === 0 ? 2 : 1)).indexOf(x)
   }
 }
