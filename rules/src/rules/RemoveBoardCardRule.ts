@@ -13,7 +13,7 @@ export class RemoveBoardCardRule extends PlayerTurnRule {
   }
 
   afterItemMove(move: ItemMove) {
-    if (!isMoveItemType(MaterialType.Card)(move)) return []
+    if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.Destroyed) return []
     return [
       ...new BoardHelper(this.game).refillBoardMoves,
       this.rules().startRule(RuleId.Rest)

@@ -17,7 +17,7 @@ export class ReserveRule extends PlayerTurnRule {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.Reserve) return []
     return [
       ...new BoardHelper(this.game).refillBoardMoves,
-      this.rules().startRule(RuleId.Rest),
+      this.rules().startRule(RuleId.Rest)
     ]
   }
 
