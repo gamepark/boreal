@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { ItemContext, LineLocator } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import { borealCardDescription } from '../material/BorealCardDescription'

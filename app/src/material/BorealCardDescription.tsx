@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { Card, CardBack } from '@gamepark/boreal/material/Card'
 import { CardDescription } from '@gamepark/react-game'
 import YellowStart1 from '../images/cards/yellow_start_1.jpg'

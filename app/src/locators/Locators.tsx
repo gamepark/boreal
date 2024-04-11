@@ -6,6 +6,7 @@ import { boardCardLocator } from './BoardCardLocator'
 import { boardLocator } from './BoardLocator'
 import { boardTokenLocator } from './BoardTokenLocator'
 import { cardDeckLocator } from './CardDeckLocator'
+import { destroyedCardLocator } from './DestroyedCardLocator'
 import { pyramidLocator } from './PyramidLocator'
 import { reserveLocator } from './ReserveLocator'
 
@@ -16,4 +17,5 @@ export const Locators: Partial<Record<LocationType, ItemLocator<PlayerColor, Mat
   [LocationType.BoardCard]: boardCardLocator,
   [LocationType.Pyramid]: pyramidLocator,
   [LocationType.Reserve]: reserveLocator,
+  [LocationType.Destroyed]: destroyedCardLocator,
 }

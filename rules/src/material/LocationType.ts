@@ -5,5 +5,6 @@ export enum LocationType {
   Hand,
   Pyramid,
   Reserve,
-  Deck
+  Deck,
+  Destroyed
 }
