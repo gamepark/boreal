@@ -24,7 +24,7 @@ export class DiscoverRule extends PlayerTurnRule {
     moves.push(...new BoardHelper(this.game).refillBoardMoves)
 
     const item = this.material(MaterialType.Card).index(move.itemIndex)
-    moves.push(...new EffectHelper(this.game, item).moves)
+    moves.push(...new EffectHelper(this.game, item).effectMoves)
     if (moves.some(isStartRule)) {
       return moves
     }

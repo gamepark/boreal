@@ -15,11 +15,11 @@ export class EffectHelper extends PlayerTurnRule {
   get placementEffects(): Effect[] {
     const item = this.card.getItem()!
     const id = item.id.front
-    if (!item.id) return []
+    if (!id) return []
     return Cards[id].placementEffects ?? []
   }
 
-  get moves(): MaterialMove[] {
+  get effectMoves(): MaterialMove[] {
     const moves: MaterialMove[] = []
     for (const effect of this.placementEffects) {
       moves.push(...this.getOpponentLoseCompassMoves(effect))
@@ -48,7 +48,9 @@ export class EffectHelper extends PlayerTurnRule {
 
   getWinCompassMoves(effect: Effect) {
     if (!isWinCompassEffect(effect)) return []
-    const playerCompass = this.getPlayerCompass(this.player)
+    const item = this.card.getItem()!
+    const cardCost = Cards[item.id.front].cost ?? 0
+    const playerCompass = this.getPlayerCompass(this.player) - cardCost
     const addedCompass = Math.min(8 - playerCompass, effect.count)
     if (!addedCompass) return []
     return this.material(MaterialType.ExplorationToken)

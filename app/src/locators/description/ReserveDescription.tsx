@@ -15,9 +15,6 @@ export class ReserveDescription extends LocationDescription {
     return [{
       type: LocationType.Reserve,
       player: player
-    },{
-      type: LocationType.Reserve,
-      player: context.rules.players.find((p) => p !== p)
     }]
   }
 
