@@ -61,10 +61,12 @@ export class DiscoverRule extends PlayerTurnRule {
     return moves
   }
 
-  canBeBought(cost: number, boardCard: MaterialItem) {
+  canBeBought(cost: number, item: MaterialItem) {
     const compass = this.compass
-    if (this.player === PlayerColor.Black && boardCard.location.x! > (compass - 1)) return false
-    if (this.player === PlayerColor.White && (boardCard.location.x!) < (8 - compass)) return false
+    if (item.location.type === LocationType.BoardCard) {
+      if (this.player === PlayerColor.Black && item.location.x! > (compass - 1)) return false
+      if (this.player === PlayerColor.White && (item.location.x!) < (8 - compass)) return false
+    }
     return compass >= cost
   }
 

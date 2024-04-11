@@ -62,7 +62,7 @@ export class EffectHelper extends PlayerTurnRule {
 
   getPlayerCompass(playerId: PlayerColor) {
     return this.material(MaterialType.ExplorationToken)
-      .player(playerId)
+      .id(playerId)
       .getItem()!
       .location.x!
   }
