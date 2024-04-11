@@ -2,7 +2,7 @@
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { LocationContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api/dist/material/location/Location'
+import { Location } from '@gamepark/rules-api'
 import { borealCardDescription } from '../../material/BorealCardDescription'
 
 export class BoardCardDescription extends LocationDescription {
@@ -17,10 +17,10 @@ export class BoardCardDescription extends LocationDescription {
     }))
   }
 
-  coordinates = { x: -27, y: -20, z: 0.05}
+  coordinates = { x: -27, y: -20, z: 0.05 }
 
   getCoordinates(location: Location, context: LocationContext) {
-    const coordinates = { x: -27, y: -20, z: 20}
+    const coordinates = { x: -27, y: -20, z: 20 }
     const index = this.getIndex(location, context)
     coordinates.x += (borealCardDescription.width + 0.705) * index
     return coordinates
