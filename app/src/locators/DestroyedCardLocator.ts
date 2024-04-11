@@ -1,13 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { PileLocator } from '@gamepark/react-game'
+import { MaterialItem } from '@gamepark/rules-api'
+import { Coordinates } from '@gamepark/rules-api/dist/material/location/Location'
 import { DestroyedCardDescription } from './description/DestroyedCardDescription'
 
 export class DestroyedCardLocator extends PileLocator {
   locationDescription = new DestroyedCardDescription()
 
-  coordinates = {
-    ...this.locationDescription.coordinates,
-    z: 0
+  getCoordinates(item: MaterialItem): Coordinates {
+    return {
+      ...this.locationDescription.coordinates,
+      z: 0.05 * item.location.x!
+    }
   }
 
   maxAngle = 10
