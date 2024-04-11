@@ -15,12 +15,15 @@ export class ReserveDescription extends LocationDescription {
     return [{
       type: LocationType.Reserve,
       player: player
+    },{
+      type: LocationType.Reserve,
+      player: context.rules.players.find((p) => p !== p)
     }]
   }
 
   getSize(_location: Location, _context: MaterialContext) {
     return {
-      height: borealCardDescription.height * 5.3,
+      height: borealCardDescription.height * 4.65,
       width: borealCardDescription.width
     }
   }
@@ -29,16 +32,16 @@ export class ReserveDescription extends LocationDescription {
   getCoordinates(location: Location, context: LocationContext) {
     const coordinates = this.getReserveCoordinate(location, context)
     coordinates.z = 20
-    coordinates.y = borealCardDescription.height * 1.42
+    coordinates.y += 12.75
     return coordinates
   }
 
   getReserveCoordinate(location: Location, context: MaterialContext) {
     const { player, rules } = context
     if (location.player === (player ?? rules.players[0])) {
-      return { x: -45, y: -5, z: 0 }
+      return { x: -45, y: -8.5, z: 0 }
     }
-    return { x: 45, y: -5, z: 0 }
+    return { x: 45, y: -8.5, z: 0 }
   }
 
   canLongClick() {

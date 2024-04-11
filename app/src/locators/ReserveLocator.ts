@@ -14,7 +14,7 @@ export class ReserveLocator extends LineLocator {
     return this.locationDescription.getReserveCoordinate(item.location, context)
   }
 
-  deltaMax = { y: 22 }
+  deltaMax = { y: 25.5 }
 
 }
 
