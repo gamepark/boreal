@@ -1,9 +1,10 @@
-import { isMoveItemType, ItemMove, Material, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
-import { Descriptions } from '../material/CardDescription'
+import { isMoveItemType, isStartRule, ItemMove, Material, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
+import { Cards } from '../material/CardDescription'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { PlayerColor } from '../PlayerColor'
 import { BoardHelper } from './helper/BoardHelper'
+import { EffectHelper } from './helper/EffectHelper'
 import { PyramidHelper } from './helper/PyramidHelper'
 import { RuleId } from './RuleId'
 
@@ -18,47 +19,38 @@ export class DiscoverRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.Pyramid) return []
+    const moves: MaterialMove[] = []
+    moves.push(...this.getPaymentMoves(move))
+    moves.push(...new BoardHelper(this.game).refillBoardMoves)
+
+    const item = this.material(MaterialType.Card).index(move.itemIndex)
+    moves.push(...new EffectHelper(this.game, item).moves)
+    if (moves.some(isStartRule)) {
+      return moves
+    }
+
+    moves.push(this.rules().startRule(RuleId.Rest))
+    return moves
+  }
+
+  getPaymentMoves(move: MoveItem) {
     const item = this.material(MaterialType.Card).getItem(move.itemIndex)!
-    const cost = Descriptions[item.id.front].cost ?? 0
-    if (!cost) {
-      return this.goNext(move)
-    }
-    return [
-      this
-        .material(MaterialType.ExplorationToken)
-        .id(this.player)
-        .moveItem((i) => ({
-          ...i.location,
-          x: i.location.x! - cost
-        })),
-      ...this.goNext(move)
-    ]
-  }
-
-  goNext(_move: MoveItem): MaterialMove[] {
-    if (this.isOnePyramidCompleted && this.player === PlayerColor.Black) {
-      return [
-        this.rules().endGame()
-      ]
-    }
-
-    return [
-      this.rules().startRule(RuleId.Rest),
-      ...new BoardHelper(this.game).refillBoardMoves,
-    ]
-  }
-
-  get isOnePyramidCompleted() {
-    return this.game.players.some((p) =>
-      this.material(MaterialType.Card).location(LocationType.Pyramid).player(p).length === 10
-    )
+    const cost = Cards[item.id.front].cost ?? 0
+    if (!cost) return []
+    return this
+      .material(MaterialType.ExplorationToken)
+      .id(this.player)
+      .moveItems((i) => ({
+        ...i.location,
+        x: i.location.x! - cost
+      }))
   }
 
   getPlaceMoves(cards: Material) {
     const moves: MaterialMove[] = []
     for (const cardIndex of cards.getIndexes()) {
       const item = cards.getItem(cardIndex)!
-      const cost = Descriptions[item.id.front].cost ?? 0
+      const cost = Cards[item.id.front].cost ?? 0
       if (!this.canBeBought(cost, item)) continue
 
       const card = cards.index(cardIndex)

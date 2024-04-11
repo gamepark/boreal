@@ -40,4 +40,8 @@ export class ReserveDescription extends LocationDescription {
     }
     return { x: 45, y: -5, z: 0 }
   }
+
+  canLongClick() {
+    return false
+  }
 }

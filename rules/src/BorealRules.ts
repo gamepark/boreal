@@ -3,6 +3,10 @@ import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { PlayerColor } from './PlayerColor'
 import { ExploreRule } from './rules/ExploreRule'
+import { InverseBoardCardsRule } from './rules/InverseBoardCardsRule'
+import { InversePyramidCardsRule } from './rules/InversePyramidCardsRule'
+import { PickCardRule } from './rules/PickCardRule'
+import { RemoveBoardCardRule } from './rules/RemoveBoardCardRule'
 import { ReserveRule } from './rules/ReserveRule'
 import { RestRule } from './rules/RestRule'
 import { RuleId } from './rules/RuleId'
@@ -16,7 +20,11 @@ export class BorealRules extends SecretMaterialRules<PlayerColor, MaterialType, 
   rules = {
     [RuleId.Explore]: ExploreRule,
     [RuleId.Rest]: RestRule,
-    [RuleId.Reserve]: ReserveRule
+    [RuleId.Reserve]: ReserveRule,
+    [RuleId.InversePyramidCards]: InversePyramidCardsRule,
+    [RuleId.InvertBoardCards]: InverseBoardCardsRule,
+    [RuleId.Remove]: RemoveBoardCardRule,
+    [RuleId.Pick]: PickCardRule
   }
 
   hidingStrategies = {

@@ -15,5 +15,5 @@ export const Locators: Partial<Record<LocationType, ItemLocator<PlayerColor, Mat
   [LocationType.Deck]: cardDeckLocator,
   [LocationType.BoardCard]: boardCardLocator,
   [LocationType.Pyramid]: pyramidLocator,
-  [LocationType.Reserve]: reserveLocator
+  [LocationType.Reserve]: reserveLocator,
 }

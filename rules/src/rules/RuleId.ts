@@ -3,7 +3,7 @@ export enum RuleId {
   Rest,
   Reserve,
   Remove,
-  InvertBoard,
-  InvertPyramid,
+  InvertBoardCards,
+  InversePyramidCards,
   Pick
 }

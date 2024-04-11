@@ -1,8 +1,9 @@
 import { MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import sum from 'lodash/sum'
-import { Descriptions } from '../material/CardDescription'
+import { Cards } from '../material/CardDescription'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
+import { PlayerColor } from '../PlayerColor'
 import { RuleId } from './RuleId'
 
 export class RestRule extends PlayerTurnRule {
@@ -19,6 +20,12 @@ export class RestRule extends PlayerTurnRule {
       )
     }
 
+    if (this.isOnePyramidCompleted && this.player === PlayerColor.Black) {
+      return [
+        this.rules().endGame()
+      ]
+    }
+
     moves.push(
       this.rules().startPlayerTurn(RuleId.Explore, this.nextPlayer)
     )
@@ -26,9 +33,15 @@ export class RestRule extends PlayerTurnRule {
     return moves
   }
 
+  get isOnePyramidCompleted() {
+    return this.game.players.some((p) =>
+      this.material(MaterialType.Card).location(LocationType.Pyramid).player(p).length === 10
+    )
+  }
+
   get wonCompass() {
     const nonCoveredCards = this.nonCoveredPyramidCards
-    let wonCompass = sum(nonCoveredCards.getItems().map((item) => Descriptions[item.id.front]?.restBonus ?? 0))
+    let wonCompass = sum(nonCoveredCards.getItems().map((item) => Cards[item.id.front]?.restBonus ?? 0))
     const compass = this.compass
     if (compass === 8) return 0
     if (compass < 2) {

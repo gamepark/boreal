@@ -62,4 +62,8 @@ export class PyramidDescription extends LocationDescription {
     if (minX === undefined || maxX === undefined) return 0
     return range(minX, maxX + (y === 0 ? 2 : 1)).indexOf(x)
   }
+
+  canLongClick() {
+    return false
+  }
 }
