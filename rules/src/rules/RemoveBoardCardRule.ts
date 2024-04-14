@@ -5,6 +5,12 @@ import { BoardHelper } from './helper/BoardHelper'
 import { RuleId } from './RuleId'
 
 export class RemoveBoardCardRule extends PlayerTurnRule {
+
+  onRuleStart() {
+    const boardCards = this.boardCards
+    if (!boardCards.length) return [this.rules().startRule(RuleId.Rest)]
+    return []
+  }
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     return this.boardCards
       .moveItems({

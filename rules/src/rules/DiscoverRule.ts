@@ -66,7 +66,6 @@ export class DiscoverRule extends PlayerTurnRule {
 
   canBeBought(cost: number, item: MaterialItem) {
     const compass = this.compass
-    if (isArchive(item.id.front) && this.hasArchive) return false
     if (item.location.type === LocationType.BoardCard) {
       if (this.player === PlayerColor.Black && item.location.x! > (compass - 1)) return false
       if (this.player === PlayerColor.White && (item.location.x!) < (8 - compass)) return false
@@ -85,9 +84,11 @@ export class DiscoverRule extends PlayerTurnRule {
   }
 
   get boardCards() {
+    const hasArchive = this.hasArchive
     return this
       .material(MaterialType.Card)
       .location(LocationType.BoardCard)
+      .filter((item) => !hasArchive || !isArchive(item.id.front))
   }
 
   get reserveCards() {
@@ -104,6 +105,7 @@ export class DiscoverRule extends PlayerTurnRule {
       .id(({ front }: any) => front && isArchive(front))
       .length === 1
   }
+
   get availableSpaces() {
     return new PyramidHelper(this.game, this.player).availableSpaces
   }

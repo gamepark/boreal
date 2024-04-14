@@ -6,6 +6,8 @@ import { RuleId } from './RuleId'
 export class PickCardRule extends PlayerTurnRule {
 
   onRuleStart() {
+    const deck = this.deck
+    if (deck.length < 3) return [this.rules().startRule(RuleId.Rest)]
     return this.deck.deal({ type: LocationType.Hand, player: this.player }, 3)
   }
 

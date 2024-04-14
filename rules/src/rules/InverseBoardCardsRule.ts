@@ -4,6 +4,13 @@ import { MaterialType } from '../material/MaterialType'
 import { RuleId } from './RuleId'
 
 export class InverseBoardCardsRule extends PlayerTurnRule {
+
+  onRuleStart() {
+    const cards = this.boardCards
+    if (cards.length < 2) return [this.rules().startRule(RuleId.Rest)]
+    return []
+  }
+
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const cards = this.boardCards
     const indexes = cards.getIndexes()
