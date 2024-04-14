@@ -1,4 +1,5 @@
 import { isMoveItemType, isStartRule, ItemMove, Material, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
+import { isArchive } from '../material/Card'
 import { Cards } from '../material/CardDescription'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
@@ -50,11 +51,13 @@ export class DiscoverRule extends PlayerTurnRule {
     const moves: MaterialMove[] = []
     for (const cardIndex of cards.getIndexes()) {
       const item = cards.getItem(cardIndex)!
-      const cost = Cards[item.id.front].cost ?? 0
+      const description = Cards[item.id.front]
+      const cost = description.cost ?? 0
       if (!this.canBeBought(cost, item)) continue
 
       const card = cards.index(cardIndex)
       for (const space of this.availableSpaces) {
+        if (space.y === 0 && description.baselineForbidden) continue
         moves.push(card.moveItem({ type: LocationType.Pyramid, player: this.player, ...space }))
       }
     }
@@ -63,6 +66,7 @@ export class DiscoverRule extends PlayerTurnRule {
 
   canBeBought(cost: number, item: MaterialItem) {
     const compass = this.compass
+    if (isArchive(item.id.front) && this.hasArchive) return false
     if (item.location.type === LocationType.BoardCard) {
       if (this.player === PlayerColor.Black && item.location.x! > (compass - 1)) return false
       if (this.player === PlayerColor.White && (item.location.x!) < (8 - compass)) return false
@@ -93,6 +97,13 @@ export class DiscoverRule extends PlayerTurnRule {
       .player(this.player)
   }
 
+  get hasArchive() {
+    return this
+      .material(MaterialType.Card)
+      .player(this.player)
+      .id(({ front }: any) => front && isArchive(front))
+      .length === 1
+  }
   get availableSpaces() {
     return new PyramidHelper(this.game, this.player).availableSpaces
   }

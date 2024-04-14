@@ -8,7 +8,8 @@ export type CardDescription = {
   cost?: number
   restBonus?: number
   victoryPointEffect?: VictoryPointEffects,
-  placementEffects?: Effect[]
+  placementEffects?: Effect[],
+  baselineForbidden?: boolean
 }
 
 
@@ -68,7 +69,8 @@ const Yellow5: CardDescription = {
     type: VictoryPointType.PerFamily,
     points: 2,
     family: CardFamily.Green
-  }
+  },
+  baselineForbidden: true
 }
 
 const Yellow6: CardDescription = {
@@ -113,7 +115,8 @@ const Yellow9: CardDescription = {
   victoryPointEffect: {
     type: VictoryPointType.Brut,
     points: 3
-  }
+  },
+  baselineForbidden: true
 }
 
 const RedStart1: CardDescription = {
@@ -176,7 +179,8 @@ const Red5: CardDescription = {
     type: VictoryPointType.PerFamily,
     family: CardFamily.Blue,
     points: 2
-  }
+  },
+  baselineForbidden: true
 }
 
 const Red6: CardDescription = {
@@ -279,7 +283,8 @@ const Blue5: CardDescription = {
     type: VictoryPointType.PerFamily,
     family: CardFamily.Yellow,
     points: 2
-  }
+  },
+  baselineForbidden: true
 }
 
 const Blue6: CardDescription = {
@@ -373,7 +378,8 @@ const Green5: CardDescription = {
     type: VictoryPointType.PerFamily,
     family: CardFamily.Red,
     points: 2
-  }
+  },
+  baselineForbidden: true
 }
 
 const Green6: CardDescription = {
