@@ -3,12 +3,14 @@ import { css } from '@emotion/react'
 import { BorealRules } from '@gamepark/boreal/BorealRules'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
+import { ScoreHelper } from '@gamepark/boreal/rules/helper/ScoreHelper'
 import { StyledPlayerPanel, usePlayerId, usePlayers, useRules } from '@gamepark/react-game'
 import { FC } from 'react'
 import { createPortal } from 'react-dom'
-import Compass from '../images/tokens/compass.jpg'
-import WhitePanelBG from '../images/panel/white_player.jpg'
 import BlackPanelBG from '../images/panel/black_player.jpg'
+import WhitePanelBG from '../images/panel/white_player.jpg'
+import Compass from '../images/tokens/compass.jpg'
+import VictoryPoint from '../images/tokens/victory-point.png'
 
 export const PlayerPanels: FC<any> = () => {
   const playerId = usePlayerId()
@@ -19,20 +21,29 @@ export const PlayerPanels: FC<any> = () => {
     return null
   }
 
+  const isEnded = rules?.game.rule?.id === undefined
+
+
   return createPortal(
     <>
-      {players.map((player) =>
-        <StyledPlayerPanel
-          key={player.id}
-          player={player}
-          backgroundImage={player.id === PlayerColor.Black? BlackPanelBG: WhitePanelBG}
-          css={[panelPosition, player.id === (playerId ?? rules.players[0])? leftPosition: rightPosition ]}
-          mainCounter={{
-            image: Compass,
-            value: rules.material(MaterialType.ExplorationToken).id(player.id).getItem()?.location.x ?? 0,
-            imageCss: css`border-radius: 5em;`
-          }}
-        />
+      {players.map((player) => {
+        const mainCounter = !isEnded? {
+          image: Compass,
+          value: rules.material(MaterialType.ExplorationToken).id(player.id).getItem()?.location.x ?? 0,
+          imageCss: css`border-radius: 5em;`
+        }: {
+          image: VictoryPoint,
+          value: new ScoreHelper(rules.game, player.id).totalScore,
+          imageCss: css`border: 0px; background-size: contain`
+        }
+          return <StyledPlayerPanel
+            key={player.id}
+            player={player}
+            backgroundImage={player.id === PlayerColor.Black ? BlackPanelBG : WhitePanelBG}
+            css={[panelPosition, player.id === (playerId ?? rules.players[0]) ? leftPosition : rightPosition]}
+            mainCounter={mainCounter}
+          />
+        }
       )}
     </>,
     root

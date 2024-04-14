@@ -32,7 +32,7 @@ export class InversePyramidCardsRule extends PlayerTurnRule {
     const itemOnThisPlace = this
       .material(MaterialType.Card)
       .player(this.player)
-      .location((l) => move.location.type === LocationType.Pyramid && move.location.x === l.x && move.location.y === l.y)
+      .location((l) => move.location.type === l.type && move.location.x === l.x && move.location.y === l.y)
 
     if (!itemOnThisPlace.length) return []
 

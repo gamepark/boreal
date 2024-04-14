@@ -9,8 +9,6 @@ export class PyramidLocator extends ItemLocator {
   getPosition(item: MaterialItem, context: ItemContext) {
     return this.locationDescription.getPyramidSpaceCoordinates(item.location, context)
   }
-
-
 }
 
 export const pyramidLocator = new PyramidLocator()

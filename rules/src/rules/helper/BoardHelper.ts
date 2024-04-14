@@ -3,8 +3,6 @@ import { MaterialType } from '../../material/MaterialType'
 import { MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 
 export class BoardHelper extends MaterialRulesPart {
-
-
   get refillBoardMoves(): MaterialMove[] {
     const deck = this.deck
     const boardCards = this.boardCards

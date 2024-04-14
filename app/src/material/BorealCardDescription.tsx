@@ -1,6 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { css, Interpolation, Theme } from '@emotion/react'
 import { Card, CardBack } from '@gamepark/boreal/material/Card'
-import { CardDescription } from '@gamepark/react-game'
+import { LocationType } from '@gamepark/boreal/material/LocationType'
+import { MaterialType } from '@gamepark/boreal/material/MaterialType'
+import { ScoreHelper } from '@gamepark/boreal/rules/helper/ScoreHelper'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
 import YellowStart1 from '../images/cards/yellow_start_1.jpg'
 import YellowStart2 from '../images/cards/yellow_start_2.jpg'
 import YellowStart3 from '../images/cards/yellow_start_3.jpg'
@@ -47,6 +51,7 @@ import Archive7 from '../images/cards/archive_7.jpg'
 import Archive8 from '../images/cards/archive_8.jpg'
 import StartBack from '../images/cards/start_back.jpg'
 import StandardBack from '../images/cards/standard_back.jpg'
+import { MaterialItem } from '@gamepark/rules-api'
 
 export class BorealCardDescription extends CardDescription {
   height = 7
@@ -104,6 +109,24 @@ export class BorealCardDescription extends CardDescription {
     [Card.Archive6]: Archive6,
     [Card.Archive7]: Archive7,
     [Card.Archive8]: Archive8,
+  }
+  getItemExtraCss(item: MaterialItem, _context: ItemContext): Interpolation<Theme> {
+    const { rules, index } = _context
+    if (item.location.type !== LocationType.Pyramid) return
+    const cardScore = new ScoreHelper(rules.game, item.location.player!).getCardScore(rules.material(MaterialType.Card).index(index))
+    return css`
+      &:after {
+        content: '${cardScore}';
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        font-size: 3em;
+        left: 0;
+        color: black;
+        transform: translateZ(10px);
+      }
+    `
   }
 }
 

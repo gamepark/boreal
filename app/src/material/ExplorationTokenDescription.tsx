@@ -5,6 +5,7 @@ import { MaterialItem } from '@gamepark/rules-api'
 import BlackToken from '../images/tokens/black_token.jpg'
 import WhiteToken from '../images/tokens/white_token.jpg'
 import Compass from '../images/tokens/compass.jpg'
+import VictoryPoint from '../images/tokens/victory-point.png'
 import WhitePanelBG from '../images/panel/white_player.jpg'
 import BlackPanelBG from '../images/panel/black_player.jpg'
 
@@ -29,6 +30,7 @@ export class ExplorationTokenDescription extends TokenDescription {
     return [
       ...super.getImages(),
       Compass,
+      VictoryPoint,
       WhitePanelBG,
       BlackPanelBG
     ]

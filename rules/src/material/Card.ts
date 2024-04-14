@@ -55,6 +55,8 @@ export enum CardFamily {
   Archive
 }
 
+export const families = Object.values(CardFamily).filter(isEnumValue)
+
 export enum CardBack {
   Starting = 1,
   Standard

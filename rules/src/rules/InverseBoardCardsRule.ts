@@ -25,7 +25,7 @@ export class InverseBoardCardsRule extends PlayerTurnRule {
     const movedItem = this.material(MaterialType.Card).getItem(move.itemIndex)!
     const itemOnThisPlace = this
       .material(MaterialType.Card)
-      .location((l) => move.location.type === LocationType.BoardCard && move.location.x === l.x)
+      .location((l) => move.location.type === l.type && move.location.x === l.x)
     if (!itemOnThisPlace.length) return []
 
     const moves: MaterialMove[] = []

@@ -2,11 +2,11 @@
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
+import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { PyramidHelper } from '@gamepark/boreal/rules/helper/PyramidHelper'
 import { RuleId } from '@gamepark/boreal/rules/RuleId'
 import { LocationContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
-import { range } from 'lodash'
+import { Location, MaterialGame, MaterialRules } from '@gamepark/rules-api'
 import { borealCardDescription } from '../../material/BorealCardDescription'
 
 export class PyramidDescription extends LocationDescription {
@@ -26,6 +26,7 @@ export class PyramidDescription extends LocationDescription {
         ...placedCards.map((c) => c.location)
       )
     }
+    if (rules.game.rule?.id !== RuleId.Explore || player !== rules.game.rule?.player) return locations
 
     locations.push(
       ...pyramidHelper.availableSpaces.flatMap((s) => ({
@@ -38,7 +39,12 @@ export class PyramidDescription extends LocationDescription {
     return locations
   }
 
+  game?: MaterialGame
   alwaysVisible = true
+  deltaX = {
+    [PlayerColor.Black]: 0,
+    [PlayerColor.White]: 0
+  }
 
   getExtraCss(location: Location, context: LocationContext) {
     const { rules } = context
@@ -62,25 +68,26 @@ export class PyramidDescription extends LocationDescription {
 
   getPyramidSpaceCoordinates(location: Location, context: MaterialContext) {
     const { player, rules } = context
-    const itsFirst = location.player === (player ?? rules.players[0])
-    const baseCoordinates = { x: itsFirst ? -21 : 20, y: 17, z: 0 }
-    const baseline = rules.material(MaterialType.Card).location((l) => l.type === LocationType.Pyramid && l.player === location.player && l.y === 0)
-    const minX = baseline.minBy((item) => item.location.x!).getItem()?.location.x
-    const maxX = baseline.maxBy((item) => item.location.x!).getItem()?.location.x
-    if (baseline.length > 1) {
-      baseCoordinates.x -= ((baseline.length - 1) / 2) * borealCardDescription.width
+    if (rules.game !== this.game && rules.game?.rule?.id === RuleId.Explore) {
+      this.refreshDeltaX(rules)
+      this.game = rules.game
     }
 
-    baseCoordinates.x += location.y! * (borealCardDescription.width * 0.5)
-    baseCoordinates.x += this.getCardIndex(minX, maxX, location.x!, location.y!) * (borealCardDescription.width + 0.3)
+    const itsFirst = location.player === (player ?? rules.players[0])
+    const baseCoordinates = { x: itsFirst ? -21 : 20, y: 17, z: 0 }
+    baseCoordinates.x += ((location.x! / 2) - this.deltaX[location.player!]) * (borealCardDescription.width + 0.3)
     baseCoordinates.y -= location.y! * (borealCardDescription.width + 0.3)
-
     return baseCoordinates
   }
 
-  getCardIndex(minX: number | undefined, maxX: number | undefined, x: number, y: number) {
-    if (minX === undefined || maxX === undefined) return 0
-    return range(minX, maxX + (y === 0 ? 2 : 1)).indexOf(x)
+  refreshDeltaX(rules: MaterialRules) {
+    for (const player of rules.players) {
+      const baseline = rules.material(MaterialType.Card).player(player).location((l) => l.type === LocationType.Pyramid && l.y === 0)
+      const minX = baseline.minBy((item) => item.location.x!).getItem()?.location.x ?? 0
+      const maxX = baseline.maxBy((item) => item.location.x!).getItem()?.location.x ?? 0
+
+      this.deltaX[player] = (maxX - minX) / 4 + (minX / 2)
+    }
   }
 
   canLongClick() {

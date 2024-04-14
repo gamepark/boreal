@@ -64,10 +64,10 @@ export class RestRule extends PlayerTurnRule {
   get nonCoveredPyramidCards() {
     const pyramid = this.pyramid
     return pyramid.filter((item) => {
-      const topLocation = item.location.y! + 1
+        const topLocation = item.location.y! + 1
         return !pyramid.filter((i) =>
           i.location.y === topLocation
-          && (i.location.x === item.location.x || i.location.x === (item.location.x! - 1))
+          && Math.abs(i.location.x! - item.location.x!) === 1
         ).length
       }
     )
