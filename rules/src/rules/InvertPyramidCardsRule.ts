@@ -3,16 +3,16 @@ import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { RuleId } from './RuleId'
 
-export class InverseBoardCardsRule extends PlayerTurnRule {
+export class InvertPyramidCardsRule extends PlayerTurnRule {
 
   onRuleStart() {
-    const cards = this.boardCards
+    const cards = this.pyramidCards
     if (cards.length < 2) return [this.rules().startRule(RuleId.Rest)]
     return []
   }
 
   getPlayerMoves(): MaterialMove<number, number, number>[] {
-    const cards = this.boardCards
+    const cards = this.pyramidCards
     const indexes = cards.getIndexes()
     const moves: MaterialMove[] = []
     for (const index of indexes) {
@@ -32,7 +32,9 @@ export class InverseBoardCardsRule extends PlayerTurnRule {
     const movedItem = this.material(MaterialType.Card).getItem(move.itemIndex)!
     const itemOnThisPlace = this
       .material(MaterialType.Card)
-      .location((l) => move.location.type === l.type && move.location.x === l.x)
+      .player(this.player)
+      .location((l) => move.location.type === l.type && move.location.x === l.x && move.location.y === l.y)
+
     if (!itemOnThisPlace.length) return []
 
     const moves: MaterialMove[] = []
@@ -41,8 +43,9 @@ export class InverseBoardCardsRule extends PlayerTurnRule {
     return moves
   }
 
-  get boardCards() {
+  get pyramidCards() {
     return this.material(MaterialType.Card)
-      .location(LocationType.BoardCard)
+      .location(LocationType.Pyramid)
+      .player(this.player)
   }
 }

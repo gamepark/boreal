@@ -20,7 +20,7 @@ export class PyramidDescription extends LocationDescription {
     const locations: Location[] = []
     if (!player) return locations
     const pyramidHelper = new PyramidHelper(rules.game, player)
-    if (rules.game.rule?.id === RuleId.InversePyramidCards && rules.game?.rule.player === player) {
+    if (rules.game.rule?.id === RuleId.InvertPyramidCards && rules.game?.rule.player === player) {
       const placedCards = rules.material(MaterialType.Card).player(player).location(LocationType.Pyramid).getItems()
       locations.push(
         ...placedCards.map((c) => c.location)

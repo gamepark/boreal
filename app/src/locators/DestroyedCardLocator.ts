@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { PileLocator } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api'
-import { Coordinates } from '@gamepark/rules-api/dist/material/location/Location'
+import { Coordinates, MaterialItem } from '@gamepark/rules-api'
 import { DestroyedCardDescription } from './description/DestroyedCardDescription'
 
 export class DestroyedCardLocator extends PileLocator {
