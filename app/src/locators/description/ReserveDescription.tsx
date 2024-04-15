@@ -36,9 +36,9 @@ export class ReserveDescription extends LocationDescription {
   getReserveCoordinate(location: Location, context: MaterialContext) {
     const { player, rules } = context
     if (location.player === (player ?? rules.players[0])) {
-      return { x: -45, y: -8.5, z: 0 }
+      return { x: -45, y: -10.5, z: 0 }
     }
-    return { x: 45, y: -8.5, z: 0 }
+    return { x: 45, y: -10.5, z: 0 }
   }
 
   canLongClick() {

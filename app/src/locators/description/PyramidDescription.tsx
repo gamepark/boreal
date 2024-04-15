@@ -68,13 +68,13 @@ export class PyramidDescription extends LocationDescription {
 
   getPyramidSpaceCoordinates(location: Location, context: MaterialContext) {
     const { player, rules } = context
-    if (rules.game !== this.game && rules.game?.rule?.id === RuleId.Explore) {
+    if (rules.game !== this.game && (!this.game || rules.game?.rule?.id === RuleId.Explore)) {
       this.refreshDeltaX(rules)
       this.game = rules.game
     }
 
     const itsFirst = location.player === (player ?? rules.players[0])
-    const baseCoordinates = { x: itsFirst ? -21 : 20, y: 17, z: 0 }
+    const baseCoordinates = { x: itsFirst ? -20 : 20, y: 15, z: 0 }
     baseCoordinates.x += ((location.x! / 2) - this.deltaX[location.player!]) * (borealCardDescription.width + 0.3)
     baseCoordinates.y -= location.y! * (borealCardDescription.width + 0.3)
     return baseCoordinates
