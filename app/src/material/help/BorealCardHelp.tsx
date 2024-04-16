@@ -66,7 +66,7 @@ const VisibleBorealCardHelp: FC<MaterialHelpProps> = (props) => {
         </p>
       )}
       {!!description.victoryPointEffect && (
-        <p css={[textWithIconCss]}>
+        <p css={textWithIconCss}>
           {getVictoryPointText(description.victoryPointEffect)}
         </p>
       )}
