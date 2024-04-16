@@ -154,7 +154,7 @@ const RedStart3: CardDescription = {
     points: 3
   },
   placementEffects: [{
-    type: EffectType.InverseBoardCards,
+    type: EffectType.InvertBoardCards,
   }]
 }
 
@@ -338,7 +338,7 @@ const GreenStart1: CardDescription = {
     points: 2
   },
   placementEffects: [{
-    type: EffectType.InversePyramidCards,
+    type: EffectType.InvertPyramidCards,
   }]
 }
 
@@ -401,7 +401,7 @@ const Green7: CardDescription = {
     points: 5
   },
   placementEffects: [{
-    type: EffectType.InversePyramidCards,
+    type: EffectType.InvertPyramidCards,
   }]
 }
 

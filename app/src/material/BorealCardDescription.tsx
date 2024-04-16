@@ -47,6 +47,11 @@ import Yellow9 from '../images/cards/yellow_9.jpg'
 import YellowStart1 from '../images/cards/yellow_start_1.jpg'
 import YellowStart2 from '../images/cards/yellow_start_2.jpg'
 import YellowStart3 from '../images/cards/yellow_start_3.jpg'
+import YellowIcon from '../images/icons/yellow.jpg'
+import BlueIcon from '../images/icons/blue.jpg'
+import RedIcon from '../images/icons/red.jpg'
+import GreenIcon from '../images/icons/green.jpg'
+import { BorealCardHelp } from './help/BorealCardHelp'
 
 export class BorealCardDescription extends CardDescription {
   height = 7
@@ -123,6 +128,18 @@ export class BorealCardDescription extends CardDescription {
   //     }
   //   `
   // }
+
+  help = BorealCardHelp
+
+  getImages(): string[] {
+    return [
+      ...super.getImages(),
+      YellowIcon,
+      BlueIcon,
+      RedIcon,
+      GreenIcon
+    ]
+  }
 }
 
 export const borealCardDescription = new BorealCardDescription()

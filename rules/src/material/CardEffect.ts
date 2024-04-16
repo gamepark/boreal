@@ -2,8 +2,8 @@
 export enum EffectType {
   Reserve = 1,
   Remove,
-  InverseBoardCards,
-  InversePyramidCards,
+  InvertBoardCards,
+  InvertPyramidCards,
   WinCompass,
   OpponentLooseCompass,
   Pick
