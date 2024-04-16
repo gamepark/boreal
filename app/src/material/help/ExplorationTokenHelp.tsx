@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { MaterialHelpProps } from '@gamepark/react-game/dist/components/material/MaterialDescription'
-import { shadowCss } from '@gamepark/react-game/dist/css/componentSizeCss'
-import { usePlayerName } from '@gamepark/react-game/dist/hooks/usePlayerName'
+import { MaterialHelpProps, shadowCss, usePlayerName } from '@gamepark/react-game'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import Compass from '../../images/tokens/compass.jpg'

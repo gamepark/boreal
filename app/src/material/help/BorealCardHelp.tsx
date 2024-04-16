@@ -4,9 +4,8 @@ import { CardBack, CardFamily, isArchive } from '@gamepark/boreal/material/Card'
 import { CardDescription, Cards } from '@gamepark/boreal/material/CardDescription'
 import { Effect, EffectType, isOpponentLooseCompass, isWinCompassEffect } from '@gamepark/boreal/material/CardEffect'
 import { VictoryPointEffects, VictoryPointType } from '@gamepark/boreal/material/VictoryPointCondition'
-import { MaterialHelpProps } from '@gamepark/react-game/dist/components/material/MaterialDescription'
-import { shadowCss } from '@gamepark/react-game/dist/css/componentSizeCss'
-import { MaterialItem } from '@gamepark/rules-api/dist/material/items/MaterialItem'
+import { MaterialHelpProps, shadowCss } from '@gamepark/react-game'
+import { MaterialItem } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import BlueIcon from '../../images/icons/blue.jpg'
@@ -72,7 +71,7 @@ const VisibleBorealCardHelp: FC<MaterialHelpProps> = (props) => {
       )}
       {!!description.placementEffects?.length && (
         <>
-          <p css={titleCss}>{t('help.card.effect', { count: description.placementEffects.length ?? 0})}</p>
+          <p css={titleCss}>{t('help.card.effect', { count: description.placementEffects.length ?? 0 })}</p>
           {description.placementEffects.map((e, i) => (
             <p key={i} css={[textWithIconCss]}>
               {getEffectText(e)}
@@ -91,13 +90,13 @@ const getVictoryPointText = (effect: VictoryPointEffects) => {
     case VictoryPointType.Brut:
       return (
         <Trans defaults="help.card.points.raw" values={{ points: effect.points }}>
-          <strong />
+          <strong/>
         </Trans>
       )
     case VictoryPointType.PerFamily:
       return (
         <Trans defaults="help.card.points.family">
-          <strong />
+          <strong/>
           <span css={iconCss(familyIcons[effect.family])}/>
         </Trans>
       )
@@ -111,49 +110,49 @@ const getVictoryPointText = (effect: VictoryPointEffects) => {
     case VictoryPointType.Adjacent:
       return (
         <Trans defaults="help.card.points.adjacent">
-          <strong />
+          <strong/>
         </Trans>
       )
     case VictoryPointType.AdjacentDifferentFamily:
       return (
         <Trans defaults="help.card.points.families.adjacent">
-          <strong />
+          <strong/>
         </Trans>
       )
     case VictoryPointType.FamilyMajority:
       return (
         <Trans defaults="help.card.points.families.majority">
-          <strong />
+          <strong/>
         </Trans>
       )
     case VictoryPointType.PerFamilySet:
       return (
         <Trans defaults="help.card.points.families.collection">
-          <strong />
+          <strong/>
         </Trans>
       )
     case VictoryPointType.LeftCard:
       return (
         <Trans defaults="help.card.points.left">
-          <strong />
+          <strong/>
         </Trans>
       )
     case VictoryPointType.RightCard:
       return (
         <Trans defaults="help.card.points.right">
-          <strong />
+          <strong/>
         </Trans>
       )
     case VictoryPointType.CardUnder:
       return (
         <Trans defaults="help.card.points.under">
-          <strong />
+          <strong/>
         </Trans>
       )
     case VictoryPointType.Step:
       return (
         <Trans defaults="help.card.points.floor">
-          <strong />
+          <strong/>
         </Trans>
       )
   }
