@@ -18,18 +18,9 @@ export type BorealOptions = {
 export const BorealOptionsSpec: OptionsSpec<BorealOptions> = {
   players: {
     id: {
-      label: (t: TFunction) => t('Player color'),
+      label: (t: TFunction) => t('player.color'),
       values: playerColors,
-      valueSpec: (color: PlayerColor) => ({ label: (t: TFunction) => getPlayerName(color, t) })
+      valueSpec: (color: PlayerColor) => ({ label: (t: TFunction) => t(`player.${color}`) })
     }
-  }
-}
-
-export function getPlayerName(playerId: PlayerColor, t: TFunction) {
-  switch (playerId) {
-    case PlayerColor.White:
-      return t('White')
-    case PlayerColor.Black:
-      return t('Black')
   }
 }
