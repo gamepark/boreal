@@ -1,6 +1,6 @@
 {
   "name": "@gamepark/boreal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The rules of Boreal adapted for Game Park",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
