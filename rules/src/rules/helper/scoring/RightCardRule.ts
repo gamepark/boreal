@@ -12,7 +12,7 @@ export class RightCardRule extends VictoryPointEffectRule<LeftCard> {
         location.type === item.location.type
         && location.y === item.location.y
         && location.player === item.location.player
-        && location.x === (item.location.x! - 2))
+        && location.x === (item.location.x! + 2))
 
     if (rightCard.length) {
       if (Cards[rightCard.getItem()!.id.front].victoryPointEffect?.type === VictoryPointType.LeftCard) return 0
