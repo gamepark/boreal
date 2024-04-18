@@ -7,6 +7,7 @@
       "player.color": "Arrow color",
       "header.reserve.you": "Reserve a card from the board",
       "header.invert.board.you": "Invert 2 cards on the board",
+      "help.reserve.text": "Reserve",
       "Menu": "Menu",
       "OK": "OK",
       "Validate": "Validate",
