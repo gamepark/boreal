@@ -27,7 +27,6 @@ export class PyramidDescription extends LocationDescription {
       )
     }
     if (rules.game.rule?.id !== RuleId.Explore || player !== rules.game.rule?.player) return locations
-
     locations.push(
       ...pyramidHelper.availableSpaces.flatMap((s) => ({
         type: LocationType.Pyramid,
@@ -88,9 +87,5 @@ export class PyramidDescription extends LocationDescription {
 
       this.deltaX[player] = (maxX - minX) / 4 + (minX / 2)
     }
-  }
-
-  canLongClick() {
-    return false
   }
 }

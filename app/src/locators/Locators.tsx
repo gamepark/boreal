@@ -5,6 +5,7 @@ import { ItemLocator } from '@gamepark/react-game'
 import { boardCardLocator } from './BoardCardLocator'
 import { boardLocator } from './BoardLocator'
 import { boardTokenLocator } from './BoardTokenLocator'
+import { cardCharacteristicLocator } from './CardCharacteristicLocator'
 import { cardDeckLocator } from './CardDeckLocator'
 import { destroyedCardLocator } from './DestroyedCardLocator'
 import { playerHandLocator } from './PlayerHandLocator'
@@ -19,5 +20,6 @@ export const Locators: Partial<Record<LocationType, ItemLocator<PlayerColor, Mat
   [LocationType.Pyramid]: pyramidLocator,
   [LocationType.Reserve]: reserveLocator,
   [LocationType.Destroyed]: destroyedCardLocator,
-  [LocationType.Hand]: playerHandLocator
+  [LocationType.Hand]: playerHandLocator,
+  [LocationType.CardCharacteristics]: cardCharacteristicLocator
 }

@@ -6,5 +6,6 @@ export enum LocationType {
   Pyramid,
   Reserve,
   Deck,
-  Destroyed
+  Destroyed,
+  CardCharacteristics
 }

@@ -50,10 +50,6 @@ export class ReserveDescription extends LocationDescription {
       </div>
     )
   }
-
-  canLongClick() {
-    return false
-  }
 }
 
 const reserveTextCss = css`
