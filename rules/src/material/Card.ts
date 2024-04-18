@@ -73,4 +73,3 @@ export const isStartingLocations = (card: Card) => card % 10 <= 3
 export const standardLocations = cards.filter((c) => isLocation(c) && !isStartingLocations(c))
 
 export const startingLocations = cards.filter((c) => isLocation(c) && isStartingLocations(c))
-export const getColor = (card: Card): CardFamily => Math.floor(card / 10)

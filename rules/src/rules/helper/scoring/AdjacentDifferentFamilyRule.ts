@@ -14,15 +14,29 @@ export class AdjacentDifferentFamilyRule extends VictoryPointEffectRule<Adjacent
   }
 
   get adjacentCards() {
-    return this
+    const adjacentDifferentFamilies: CardFamily[] = []
+
+
+    const items = this
       .material(MaterialType.Card)
       .location(LocationType.Pyramid)
       .player(this.player)
       .filter((item, index) =>
         index !== this.card.getIndex()
         && isAdjacent(item.location, this.card.getItem()!.location)
-        && !Cards[item.id.front].families?.some((f: CardFamily) => this.description.families?.includes(f))
       )
+      .getItems()
+
+    for (const item of items) {
+      const cardFamilies: CardFamily[] = Cards[item.id.front].families ?? []
+      const matchingFamilies = cardFamilies.filter((f) => !adjacentDifferentFamilies.includes(f))
+      if (matchingFamilies.length) {
+        adjacentDifferentFamilies.push(...matchingFamilies)
+      }
+
+    }
+
+    return adjacentDifferentFamilies
   }
 
 }
