@@ -1,7 +1,7 @@
 import { isEnumValue } from '@gamepark/rules-api'
 
 export enum PlayerColor {
-  White = 1, Black
+  Black = 1, White
 }
 
 export const playerColors = Object.values(PlayerColor).filter(isEnumValue)

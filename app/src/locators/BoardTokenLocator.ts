@@ -9,7 +9,7 @@ export class BoardTokenLocator extends ItemLocator {
 
   getPositionOnParent(location: Location, _context: MaterialContext): XYCoordinates {
     const deltaX = (location.x === 1? 8.3: (8.3 + ((location.x! - 1) * 11.05)))
-    if (location.id === PlayerColor.Black) {
+    if (location.id === PlayerColor.White) {
       const coordinates = { x: 2.5, y: 117 }
       if (!location.x) return coordinates
       coordinates.x += deltaX

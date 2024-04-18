@@ -2,8 +2,8 @@
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { ItemContext, TokenDescription } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
-import BlackToken from '../images/tokens/black_token.jpg'
-import WhiteToken from '../images/tokens/white_token.jpg'
+import WhiteArrow from '../images/tokens/white_arrow.jpg'
+import BlackArrow from '../images/tokens/black_arrow.jpg'
 import Compass from '../images/tokens/compass.jpg'
 import VictoryPoint from '../images/tokens/victory-point.png'
 import WhitePanelBG from '../images/panel/white_player.jpg'
@@ -15,12 +15,12 @@ export class ExplorationTokenDescription extends TokenDescription {
   width = 3.5
 
   images = {
-    [PlayerColor.Black]: BlackToken,
-    [PlayerColor.White]: WhiteToken,
+    [PlayerColor.White]: WhiteArrow,
+    [PlayerColor.Black]: BlackArrow,
   }
 
   getRotateZ(item: MaterialItem, _context: ItemContext): number {
-    if (item.id === PlayerColor.Black) {
+    if (item.id === PlayerColor.White) {
       return 0
     }
 

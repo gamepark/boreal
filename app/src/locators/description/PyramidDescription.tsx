@@ -42,8 +42,8 @@ export class PyramidDescription extends LocationDescription {
   game?: MaterialGame
   alwaysVisible = true
   deltaX = {
-    [PlayerColor.Black]: 0,
-    [PlayerColor.White]: 0
+    [PlayerColor.White]: 0,
+    [PlayerColor.Black]: 0
   }
 
   getExtraCss(location: Location, context: LocationContext) {

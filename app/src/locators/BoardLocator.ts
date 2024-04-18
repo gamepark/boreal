@@ -7,7 +7,7 @@ export class BoardLocator extends ItemLocator {
   position = { x: 0, y: -20}
 
   getRotateZ(_item: MaterialItem, { player }: ItemContext): number {
-    if (player && player === PlayerColor.White) return 180
+    if (player && player === PlayerColor.Black) return 180
     return 0
   }
 

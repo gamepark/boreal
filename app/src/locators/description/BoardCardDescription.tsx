@@ -28,7 +28,7 @@ export class BoardCardDescription extends LocationDescription {
 
   getIndex(location: Location, context: MaterialContext): number {
     const { player, rules } = context
-    if (PlayerColor.White === (player ?? rules.players[0])) {
+    if (PlayerColor.Black === (player ?? rules.players[0])) {
       return 7 - location.x!
     }
 

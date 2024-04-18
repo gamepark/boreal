@@ -39,7 +39,7 @@ export const PlayerPanels: FC<any> = () => {
           return <StyledPlayerPanel
             key={player.id}
             player={player}
-            backgroundImage={player.id === PlayerColor.Black ? BlackPanelBG : WhitePanelBG}
+            backgroundImage={player.id === PlayerColor.White ? BlackPanelBG : WhitePanelBG}
             css={[panelPosition, player.id === (playerId ?? rules.players[0]) ? leftPosition : rightPosition]}
             mainCounter={mainCounter}
           />

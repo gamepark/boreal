@@ -53,15 +53,6 @@ export class BorealSetup extends MaterialGameSetup<PlayerColor, MaterialType, Lo
 
   setupToken() {
     this.material(MaterialType.ExplorationToken).createItem({
-      id: PlayerColor.White,
-      location: {
-        type: LocationType.BoardToken,
-        id: PlayerColor.White,
-        x: 5
-      }
-    })
-
-    this.material(MaterialType.ExplorationToken).createItem({
       id: PlayerColor.Black,
       location: {
         type: LocationType.BoardToken,
@@ -69,9 +60,18 @@ export class BorealSetup extends MaterialGameSetup<PlayerColor, MaterialType, Lo
         x: 5
       }
     })
+
+    this.material(MaterialType.ExplorationToken).createItem({
+      id: PlayerColor.White,
+      location: {
+        type: LocationType.BoardToken,
+        id: PlayerColor.White,
+        x: 5
+      }
+    })
   }
 
   start() {
-    this.startPlayerTurn(RuleId.Explore, this.game.players[0])
+    this.startPlayerTurn(RuleId.Explore, PlayerColor.White)
   }
 }
