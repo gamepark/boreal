@@ -422,7 +422,7 @@ const Green9: CardDescription = {
   restBonus: 1,
   victoryPointEffect: {
     type: VictoryPointType.Adjacent,
-    points: 2
+    points: 1
   }
 }
 
