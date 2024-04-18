@@ -16,7 +16,7 @@ export default function App() {
   return (
     <>
       { !!game && <GameDisplay players={game.players.length} /> }
-      <LoadingScreen display={loading} author="Mizuno Masafumi" artist="Yuuko Iwase" publisher="Spiral Editions" developer="Game Park"/>
+      <LoadingScreen display={loading} author="Mizuno Masafumi" artist="Yuko Iwase" publisher="Spiral Editions" developer="Game Park"/>
       <MaterialHeader rulesStepsHeaders={Headers} loading={loading}/>
       <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)} />
       <Menu/>
