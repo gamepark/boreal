@@ -47,10 +47,10 @@ import Yellow9 from '../images/cards/yellow_9.jpg'
 import YellowStart1 from '../images/cards/yellow_start_1.jpg'
 import YellowStart2 from '../images/cards/yellow_start_2.jpg'
 import YellowStart3 from '../images/cards/yellow_start_3.jpg'
-import YellowIcon from '../images/icons/yellow.jpg'
 import BlueIcon from '../images/icons/blue.jpg'
-import RedIcon from '../images/icons/red.jpg'
 import GreenIcon from '../images/icons/green.jpg'
+import RedIcon from '../images/icons/red.jpg'
+import YellowIcon from '../images/icons/yellow.jpg'
 import { BorealCardHelp } from './help/BorealCardHelp'
 
 export class BorealCardDescription extends CardDescription {
@@ -120,10 +120,13 @@ export class BorealCardDescription extends CardDescription {
   //       height: 100%;
   //       width: 100%;
   //       position: absolute;
+  //       display: flex;
+  //       align-items: center;
+  //       justify-content: center;
   //       top: 0;
   //       font-size: 3em;
   //       left: 0;
-  //       color: black;
+  //       color: red;
   //       transform: translateZ(10px);
   //     }
   //   `
