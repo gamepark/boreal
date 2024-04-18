@@ -172,6 +172,7 @@
       "help.card.effect.draw-pick": "Regardez les 3 premières cartes de la pioche, <0>choisissez-en une et mettez-la dans votre réserve</0> (les 2 autres cartes sont remises sous la pioche).",
       "help.scoring": "Décompte des points",
       "help.scoring.rules": "chaque joueuse additionne les Points de Victoire des cartes se trouvant dans sa pyramide. La joueuse qui en totalise le plus remporte la partie.\nEn cas d’égalité, c’est la joueuse ayant le moins de cartes dans sa pyramide qui l’emporte. Si l’égalité persiste, la victoire est partagée.",
+      "help.reserve.text": "Réserve",
       "Menu": "Menu",
       "OK": "OK",
       "Validate": "Valider",
