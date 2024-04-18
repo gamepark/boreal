@@ -1,9 +1,8 @@
 import { MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
-import sum from 'lodash/sum'
-import { Cards } from '../material/CardDescription'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { PlayerColor } from '../PlayerColor'
+import { PyramidHelper } from './helper/PyramidHelper'
 import { RuleId } from './RuleId'
 
 export class RestRule extends PlayerTurnRule {
@@ -40,8 +39,7 @@ export class RestRule extends PlayerTurnRule {
   }
 
   get wonCompass() {
-    const nonCoveredCards = this.nonCoveredPyramidCards
-    let wonCompass = sum(nonCoveredCards.getItems().map((item) => Cards[item.id.front]?.restBonus ?? 0))
+    let wonCompass = new PyramidHelper(this.game, this.player).restBonus
     const compass = this.compass
     if (compass === 8) return 0
     if (compass < 2) {
@@ -59,24 +57,5 @@ export class RestRule extends PlayerTurnRule {
     return this
       .material(MaterialType.ExplorationToken)
       .id(this.player)
-  }
-
-  get nonCoveredPyramidCards() {
-    const pyramid = this.pyramid
-    return pyramid.filter((item) => {
-        const topLocation = item.location.y! + 1
-        return !pyramid.filter((i) =>
-          i.location.y === topLocation
-          && Math.abs(i.location.x! - item.location.x!) === 1
-        ).length
-      }
-    )
-  }
-
-  get pyramid() {
-    return this
-      .material(MaterialType.Card)
-      .location(LocationType.Pyramid)
-      .player(this.player)
   }
 }

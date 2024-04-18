@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { BorealRules } from '@gamepark/boreal/BorealRules'
-import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
+import { PyramidHelper } from '@gamepark/boreal/rules/helper/PyramidHelper'
 import { ScoreHelper } from '@gamepark/boreal/rules/helper/ScoreHelper'
 import { StyledPlayerPanel, usePlayerId, usePlayers, useRules } from '@gamepark/react-game'
 import { FC } from 'react'
@@ -29,12 +29,12 @@ export const PlayerPanels: FC<any> = () => {
       {players.map((player) => {
         const mainCounter = !isEnded? {
           image: Compass,
-          value: rules.material(MaterialType.ExplorationToken).id(player.id).getItem()?.location.x ?? 0,
+          value: new PyramidHelper(rules.game, player.id).restBonus ?? 0,
           imageCss: css`border-radius: 5em;`
         }: {
           image: VictoryPoint,
           value: new ScoreHelper(rules.game, player.id).totalScore,
-          imageCss: css`border: 0px; background-size: contain`
+          imageCss: css`border: 0; background-size: contain`
         }
           return <StyledPlayerPanel
             key={player.id}
