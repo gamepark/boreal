@@ -1,15 +1,18 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 import { Card } from '@gamepark/boreal/material/Card'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { RuleId } from '@gamepark/boreal/rules/RuleId'
-import { MaterialTutorial, TutorialStep } from '@gamepark/react-game'
+import { MaterialTutorial, Picture, TutorialStep } from '@gamepark/react-game'
 import { isMoveItemType } from '@gamepark/rules-api/dist/material/moves/items/MoveItem'
 import { isStartRule } from '@gamepark/rules-api/dist/material/moves/rules/StartRule'
 import { Trans } from 'react-i18next'
 import { Characteristic } from '../locators/CardCharacteristicLocator'
 import { TutorialSetup } from './TutorialSetup'
+import victoryPoint from '../images/tokens/victory-point.png'
+import compass from '../images/tokens/compass.jpg'
 
 const me = PlayerColor.White
 const opponent = PlayerColor.Black
@@ -29,7 +32,10 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.goal"><strong/></Trans>
+        text: () => <Trans defaults="tuto.goal">
+          <strong/>
+          <Picture src={victoryPoint} css={inlineIcon}/>
+        </Trans>
       }
     },
     {
@@ -49,7 +55,10 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.exploration.token"><strong/></Trans>,
+        text: () => <Trans defaults="tuto.exploration.token">
+          <strong/>
+          <Picture src={compass} css={inlineIcon}/>
+        </Trans>,
         position: { y: 28 }
       },
       focus: (game) => ({
@@ -465,3 +474,8 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     }
   ]
 }
+
+const inlineIcon = css`
+  height: 1em;
+  vertical-align: sub;
+`
