@@ -1,10 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import { BorealRules } from '@gamepark/boreal/BorealRules'
 import { CardBack, CardFamily, isArchive } from '@gamepark/boreal/material/Card'
 import { CardDescription, Cards } from '@gamepark/boreal/material/CardDescription'
 import { Effect, EffectType, isOpponentLooseCompass, isWinCompassEffect } from '@gamepark/boreal/material/CardEffect'
+import { LocationType } from '@gamepark/boreal/material/LocationType'
+import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { VictoryPointEffects, VictoryPointType } from '@gamepark/boreal/material/VictoryPointCondition'
-import { MaterialHelpProps, shadowCss } from '@gamepark/react-game'
+import { MaterialHelpProps, shadowCss, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -24,6 +27,7 @@ export const BorealCardHelp: FC<MaterialHelpProps> = (props) => {
       <h2>{t(getCardTitle(item))}</h2>
       <BorealCardButton {...props} />
       <VisibleBorealCardHelp {...props} />
+      <CardLocation {...props} />
     </>
   )
 }
@@ -85,6 +89,52 @@ const VisibleBorealCardHelp: FC<MaterialHelpProps> = (props) => {
 
     </>
   )
+}
+
+const CardLocation: FC<MaterialHelpProps> = (props) => {
+  return (
+    <>
+      <DeckLocation {...props} />
+      <ReserveLocation {...props} />
+      <PyramidLocation {...props} />
+    </>
+  )
+}
+
+const DeckLocation: FC<MaterialHelpProps> = ({ item }) => {
+  const rules = useRules<BorealRules>()!
+  if (item.location?.type !== LocationType.Deck) return null
+  const deckLength = rules.material(MaterialType.Card).location(LocationType.Deck).length
+  return (
+    <Trans defaults="help.draw.size" values={{ number: deckLength }}/>
+  )
+}
+
+const ReserveLocation: FC<MaterialHelpProps> = (props) => {
+  const { item } = props
+  const me = usePlayerId()
+  const player = item.location?.player
+  const name = usePlayerName(player)
+  if (item.location?.type !== LocationType.Reserve) return null
+
+  if (me && player === me) {
+    return <><hr /><Trans defaults="help.card.reserve.you" /></>
+  }
+
+  return <><hr /><Trans defaults="help.card.reserve.player" values={{ player: name }} /></>
+}
+
+const PyramidLocation: FC<MaterialHelpProps> = ({ item }) => {
+  const me = usePlayerId()
+  const player = item.location?.player
+  const name = usePlayerName(player)
+  if (item.location?.type !== LocationType.Pyramid) return null
+
+  if (me && player === me) {
+    return <><hr /><Trans defaults="help.card.pyramid.you" /></>
+  }
+
+  return <><hr /><Trans defaults="help.card.pyramid.player" values={{ player: name }} /></>
 }
 
 const getVictoryPointText = (effect: VictoryPointEffects) => {

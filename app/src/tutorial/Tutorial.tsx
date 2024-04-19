@@ -6,13 +6,12 @@ import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { RuleId } from '@gamepark/boreal/rules/RuleId'
 import { MaterialTutorial, Picture, TutorialStep } from '@gamepark/react-game'
-import { isMoveItemType } from '@gamepark/rules-api/dist/material/moves/items/MoveItem'
-import { isStartRule } from '@gamepark/rules-api/dist/material/moves/rules/StartRule'
+import { isMoveItemType, isStartRule } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
+import compass from '../images/tokens/compass.jpg'
+import victoryPoint from '../images/tokens/victory-point.png'
 import { Characteristic } from '../locators/CardCharacteristicLocator'
 import { TutorialSetup } from './TutorialSetup'
-import victoryPoint from '../images/tokens/victory-point.png'
-import compass from '../images/tokens/compass.jpg'
 
 const me = PlayerColor.White
 const opponent = PlayerColor.Black
