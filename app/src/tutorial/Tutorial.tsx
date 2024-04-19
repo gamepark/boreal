@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { Card } from '@gamepark/boreal/material/Card'
+import { Card, CardId } from '@gamepark/boreal/material/Card'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
@@ -278,6 +278,26 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           && game.items[move.itemType]![move.itemIndex].id?.front === Card.GreenStart3,
         interrupt: (move) => isStartRule(move) && move.id === RuleId.Rest
       }
+    },
+    {
+      popup: {
+        text: () => <Trans defaults="tuto.effect.left"><strong/></Trans>,
+        position: { y: -15 }
+      },
+      focus: (game) => ({
+        locations: [
+          this
+            .location(LocationType.CardCharacteristics)
+            .id(Characteristic.Effect)
+            .parent(this.material(game, MaterialType.Card).id<CardId>(id => id?.front === Card.GreenStart3).getIndex())
+            .location,
+          this
+            .location(LocationType.CardCharacteristics)
+            .id(Characteristic.Savior)
+            .parent(this.material(game, MaterialType.Card).id<CardId>(id => id?.front === Card.BlueStart2).getIndex())
+            .location
+        ]
+      })
     },
     {
       popup: {

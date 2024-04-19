@@ -246,6 +246,7 @@
       "tuto.place.help": "<0>Astuce</0> : à tout moment, cliquez sur un Lieu pour connaître son effet.",
       "tuto.opponent.rest": "C'est à présent la <0>Phase de Repos</0> de votre adversaire.\nSon <0>Pion Exploration</0> est sur la case 1 : ce bonus indique qu'elle regagne <0>1 Boussole supplémentaire</0>.\nAvec son Lieu, elle regagne donc <0>2 Boussoles</0>",
       "tuto.place.2": "C'est à vous de jouer. Découvrez ce Lieu et placez-le à droite du Lieu que vous avez déjà découvert.",
+      "tuto.effect.left": "Ce lieu a un effet de fin de partie : il rapporte autant de point de Savoir que la carte située à gauche (ici 4 points).",
       "tuto.bonus.0": "Vous regagnez <0>4 Boussoles</0> pendant votre <0>Phase de Repos</0> : 2 pour vos 2 Lieux, +2 car votre Pion Exploration se trouve sur la case 0.",
       "tuto.opponent.2": "Votre adversaire a découvert ce lieu.\nC'est à nouveau votre tour.",
       "tuto.reserve.1": "Ce Lieu vous intéresse car il fait gagner 2 Boussoles à chaque tour, mais vous ne pouvez pas le découvrir, car votre Pion Exploration est trop bas.",

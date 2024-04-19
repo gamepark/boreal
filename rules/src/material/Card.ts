@@ -73,3 +73,8 @@ export const isStartingLocations = (card: Card) => card % 10 <= 3
 export const standardLocations = cards.filter((c) => isLocation(c) && !isStartingLocations(c))
 
 export const startingLocations = cards.filter((c) => isLocation(c) && isStartingLocations(c))
+
+export type CardId = {
+  front?: Card
+  back: CardBack
+}
