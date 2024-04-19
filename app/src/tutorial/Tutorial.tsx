@@ -8,6 +8,7 @@ import { RuleId } from '@gamepark/boreal/rules/RuleId'
 import { MaterialTutorial, Picture, TutorialStep } from '@gamepark/react-game'
 import { isMoveItemType, isStartRule } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
+import archive from '../images/icons/archive.png'
 import compass from '../images/tokens/compass.jpg'
 import victoryPoint from '../images/tokens/victory-point.png'
 import { Characteristic } from '../locators/CardCharacteristicLocator'
@@ -384,7 +385,10 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="help.card.archive.limit"><strong/></Trans>,
+        text: () => <Trans defaults="help.card.archive.limit">
+          <strong/>
+          <Picture src={archive} css={[inlineIcon, css`filter: drop-shadow(0em 0em 0.05em black) drop-shadow(0em 0em 0.05em black)`]}/>
+        </Trans>,
         position: { y: 20 }
       },
       focus: (game) => ({
@@ -517,7 +521,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
   ]
 }
 
-const inlineIcon = css`
+export const inlineIcon = css`
   height: 1em;
   vertical-align: sub;
 `

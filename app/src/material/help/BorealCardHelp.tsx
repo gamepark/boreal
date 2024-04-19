@@ -7,15 +7,17 @@ import { Effect, EffectType, isOpponentLooseCompass, isWinCompassEffect } from '
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { VictoryPointEffects, VictoryPointType } from '@gamepark/boreal/material/VictoryPointCondition'
-import { MaterialHelpProps, shadowCss, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
+import { MaterialHelpProps, Picture, shadowCss, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
+import archive from '../../images/icons/archive.png'
 import BlueIcon from '../../images/icons/blue.jpg'
 import GreenIcon from '../../images/icons/green.jpg'
 import RedIcon from '../../images/icons/red.jpg'
 import YellowIcon from '../../images/icons/yellow.jpg'
 import Compass from '../../images/tokens/compass.jpg'
+import { inlineIcon } from '../../tutorial/Tutorial'
 import { BorealCardButton } from './buttons/BorealCardButton'
 
 export const BorealCardHelp: FC<MaterialHelpProps> = (props) => {
@@ -44,6 +46,7 @@ const VisibleBorealCardHelp: FC<MaterialHelpProps> = (props) => {
         <p>
           <Trans defaults="help.card.archive.limit">
             <strong/>
+            <Picture src={archive} css={[inlineIcon, css`filter: drop-shadow(0em 0em 0.05em black) drop-shadow(0em 0em 0.05em black)`]}/>
           </Trans>
         </p>
       )}
