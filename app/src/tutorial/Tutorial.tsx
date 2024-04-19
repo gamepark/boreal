@@ -340,7 +340,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.Card).location(LocationType.BoardCard).location((l) => l.x === 1)
+          this.material(game, MaterialType.Card).location(LocationType.BoardCard).location((l) => l.x === 6)
         ],
         margin: {
           top: 2,
