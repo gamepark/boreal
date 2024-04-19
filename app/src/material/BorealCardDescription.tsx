@@ -1,6 +1,11 @@
 /** @jsxImportSource @emotion/react */
+import { css, Interpolation, Theme } from '@emotion/react'
 import { Card, CardBack } from '@gamepark/boreal/material/Card'
-import { CardDescription } from '@gamepark/react-game'
+import { LocationType } from '@gamepark/boreal/material/LocationType'
+import { MaterialType } from '@gamepark/boreal/material/MaterialType'
+import { ScoreHelper } from '@gamepark/boreal/rules/helper/ScoreHelper'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { MaterialItem } from '@gamepark/rules-api/dist/material/items/MaterialItem'
 import Archive1 from '../images/cards/archive_1.jpg'
 import Archive2 from '../images/cards/archive_2.jpg'
 import Archive3 from '../images/cards/archive_3.jpg'
@@ -51,6 +56,7 @@ import BlueIcon from '../images/icons/blue.jpg'
 import GreenIcon from '../images/icons/green.jpg'
 import RedIcon from '../images/icons/red.jpg'
 import YellowIcon from '../images/icons/yellow.jpg'
+import Savior from '../images/tokens/victory-point.png'
 import { BorealCardHelp } from './help/BorealCardHelp'
 
 export class BorealCardDescription extends CardDescription {
@@ -110,27 +116,29 @@ export class BorealCardDescription extends CardDescription {
     [Card.Archive7]: Archive7,
     [Card.Archive8]: Archive8,
   }
-  // getItemExtraCss(item: MaterialItem, _context: ItemContext): Interpolation<Theme> {
-  //   const { rules, index } = _context
-  //   if (item.location.type !== LocationType.Pyramid) return
-  //   const cardScore = new ScoreHelper(rules.game, item.location.player!).getCardScore(rules.material(MaterialType.Card).index(index))
-  //   return css`
-  //     &:after {
-  //       content: '${cardScore}';
-  //       height: 100%;
-  //       width: 100%;
-  //       position: absolute;
-  //       display: flex;
-  //       align-items: center;
-  //       justify-content: center;
-  //       top: 0;
-  //       font-size: 3em;
-  //       left: 0;
-  //       color: red;
-  //       transform: translateZ(10px);
-  //     }
-  //   `
-  // }
+  getItemExtraCss(item: MaterialItem, _context: ItemContext): Interpolation<Theme> {
+    const { rules, index } = _context
+    if (item.location.type !== LocationType.Pyramid || rules.game.rule?.id !== undefined) return
+    const cardScore = new ScoreHelper(rules.game, item.location.player!).getCardScore(rules.material(MaterialType.Card).index(index))
+    return css`
+      &:after {
+        content: '${cardScore}';
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        font-size: ${cardScore >= 10 ? 1.3 : 1.7}em;
+        left: 0;
+        color: white;
+        transform: translateZ(10px);
+        background-size: 43% 43%;
+        background: url(${Savior}) no-repeat 50% 55%;
+      }
+    `
+  }
 
   help = BorealCardHelp
 
