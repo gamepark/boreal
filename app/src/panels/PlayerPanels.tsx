@@ -29,7 +29,7 @@ export const PlayerPanels: FC<any> = () => {
       {players.map((player) => {
         const mainCounter = !isEnded? {
           image: Compass,
-          value: new PyramidHelper(rules.game, player.id).restBonus ?? 0,
+          value: '+' + new PyramidHelper(rules.game, player.id).restBonus ?? 0,
           imageCss: css`border-radius: 5em;`
         }: {
           image: VictoryPoint,

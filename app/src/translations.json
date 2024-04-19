@@ -248,6 +248,7 @@
       "tuto.pyamid.top": "Vous pouvez placer votre 3ème lieu à l'un de ces 3 emplacements : c'est en effet possible de placer une carte à l'étage supérieur de la pyramide <0>dès lors que 2 cartes sont présentes en dessous</0>.",
       "tuto.compass.ignored": "<0>Prenez garde néanmoins :</0> dès qu'un Lieu a au moins une autre carte au dessus de lieu, <0>il ne produit plus de Boussole lors de la Phase de Repos !</0>",
       "tuto.place.baseline": "Placez votre lieu à droite ou à gauche de votre pyramide, pour ne pas perdre tout de suite les 2 Boussoles produites par vos 2 premiers Lieux.",
+      "tuto.effects": "Certaines cartes ont des effets de pose. Par exemple, celle-ci vous permet de réserver une carte lorsque vous la posez dans votre pyramide.\nD'autres cartes ont des effets de fin de partie.\n<0>Cliquez sur une carte pour découvrir son effet !</0>",
       "tuto.end.trigger": "Lorsqu'un joueur a découvert 10 Lieux et complété sa pyramide, la partie s'arrête à la fin du tour du joueur ayant le Pion Exploration noir (afin que chaque joueur ait joué le même nombre de tours).\n<0>Le joueur ayant le plus de pions de Savoir</0> dans sa pyramide l'emporte.",
       "tuto.go": "Vous êtes libre de vos choix à présent !\nN'oubliez pas : à tout moment vous pouvez cliquer sur une carte pour découvrir son effet.\nBonne exploration, aventurière !",
       "Menu": "Menu",

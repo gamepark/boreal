@@ -7,12 +7,12 @@ import sampleSize from 'lodash/sampleSize'
 export class TutorialSetup extends BorealSetup {
 
   setupStartingLocations() {
-    const mandatoryLocations = [Card.BlueStart2, Card.GreenStart2, Card.GreenStart3, Card.YellowStart1]
+    const mandatoryLocations = [Card.BlueStart2, Card.GreenStart2, Card.GreenStart3, Card.YellowStart1, Card.RedStart1]
     const remainingLocations = startingLocations.filter((l) => !mandatoryLocations.includes(l))
     const randomLocations = sampleSize(remainingLocations, 4)
 
     const positions = [
-      randomLocations[0], Card.BlueStart2, randomLocations[1], Card.GreenStart3, randomLocations[3], randomLocations[2], Card.GreenStart2, Card.YellowStart1
+      randomLocations[0], Card.BlueStart2, randomLocations[1], Card.GreenStart3, Card.RedStart1, randomLocations[2], Card.GreenStart2, Card.YellowStart1
     ]
 
     const items = positions.map((c) => ({

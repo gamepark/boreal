@@ -50,7 +50,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     {
       popup: {
         text: () => <Trans defaults="tuto.exploration.token"><strong/></Trans>,
-        position: { y: 25 }
+        position: { y: 28 }
       },
       focus: (game) => ({
         materials: [
@@ -58,7 +58,8 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         ],
         staticItems: [
           { type: MaterialType.Board, item: { location: { type: LocationType.Board } } }
-        ]
+        ],
+        margin: { bottom: 10 }
       })
     },
     {
@@ -77,11 +78,8 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           this.material(game, MaterialType.Card).location((l) => l.type === LocationType.BoardCard && l.x! < 5),
           this.material(game, MaterialType.ExplorationToken).id(PlayerColor.White)
         ],
-        staticItems: [
-          { type: MaterialType.Board, item: { location: { type: LocationType.Board } } }
-        ],
         margin: {
-          left: 5
+          left: 5, right: 20, top: 5, bottom: 20
         }
       })
     },
@@ -129,7 +127,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           top: 2,
           bottom: 2
         }
-      }),
+      })
     },
     {
       popup: {
@@ -150,7 +148,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           bottom: 2,
           left: 5.65
         }
-      }),
+      })
     },
     {
       popup: {
@@ -171,7 +169,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           left: 6.2
         }
       }),
-      move: { }
+      move: {}
     },
     {
       popup: {
@@ -280,12 +278,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           top: 2,
           bottom: 2
         }
-      }),
+      })
     },
     {
       popup: {
         text: () => <Trans defaults="tuto.reserve.1"><strong/></Trans>,
-        position: { y: 20}
+        position: { y: 20 }
       },
       focus: (game) => ({
         materials: [
@@ -295,7 +293,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           top: 2,
           bottom: 10
         }
-      }),
+      })
     },
     {
       popup: {
@@ -386,7 +384,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           this.location(LocationType.Pyramid).player(me).y(1).x(3).location,
           this.location(LocationType.Pyramid).player(me).y(2).x(0).location,
           this.location(LocationType.Pyramid).player(me).y(2).x(2).location,
-          this.location(LocationType.Pyramid).player(me).y(3).x(1).location,
+          this.location(LocationType.Pyramid).player(me).y(3).x(1).location
         ],
         margin: {
           bottom: 2,
@@ -404,11 +402,11 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         locations: [
           this.location(LocationType.Pyramid).player(me).y(0).x(-2).location,
           this.location(LocationType.Pyramid).player(me).y(0).x(4).location,
-          this.location(LocationType.Pyramid).player(me).y(1).x(1).location,
+          this.location(LocationType.Pyramid).player(me).y(1).x(1).location
         ],
         margin: {
           bottom: 12,
-          top: 1,
+          top: 1
         }
       })
     },
@@ -427,11 +425,11 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         ],
         locations: [
           this.location(LocationType.Pyramid).player(me).y(0).x(-2).location,
-          this.location(LocationType.Pyramid).player(me).y(0).x(4).location,
+          this.location(LocationType.Pyramid).player(me).y(0).x(4).location
         ],
         margin: {
           bottom: 12,
-          top: 1,
+          top: 1
         }
       }),
       move: {
@@ -441,6 +439,19 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           && move.location.y === 0
           && game.items[move.itemType]![move.itemIndex].location.type === LocationType.Reserve
       }
+    },
+    {
+      popup: {
+        text: () => <Trans defaults="tuto.effects"><strong/></Trans>,
+        position: { y: 10 }
+      },
+      focus: game => ({
+        materials: [
+          this.material(game, MaterialType.Card).location(LocationType.BoardCard).location((l) => l.x === 4)
+        ],
+        scale: 0.6,
+        margin: { bottom: 20 }
+      })
     },
     {
       popup: {
