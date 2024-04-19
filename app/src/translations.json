@@ -2,8 +2,8 @@
   "en": {
     "translation": {
       "Name": "Boreal",
-      "player.1": "Black",
-      "player.2": "White",
+      "player.1": "White",
+      "player.2": "Black",
       "player.color": "Arrow color",
       "header.explore.you": "Choose a Location to Discover or Locate",
       "header.explore.player": "{player} chooses a Location to Discover or Locate",
@@ -168,8 +168,8 @@
   "fr": {
     "translation": {
       "Name": "Boréal",
-      "player.1": "Noir",
-      "player.2": "Blanc",
+      "player.1": "Blanc",
+      "player.2": "Noir",
       "player.color": "Couleur de flèche",
       "header.explore.you": "Choisissez un Lieu à Découvrir ou Repérer",
       "header.explore.player": "{player} choisit un Lieu à Découvrir ou Repérer",
