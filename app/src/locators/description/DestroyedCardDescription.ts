@@ -8,8 +8,5 @@ export class DestroyedCardDescription extends LocationDescription {
   width = borealCardDescription.width + 1
   borderRadius = borealCardDescription.borderRadius
   location = { type: LocationType.Destroyed }
-
   coordinates = { x: 41, y: -19, z: 20 }
-  alwaysVisible = true
-
 }

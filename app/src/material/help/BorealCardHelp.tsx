@@ -100,6 +100,7 @@ const CardLocation: FC<MaterialHelpProps> = (props) => {
       <DeckLocation {...props} />
       <ReserveLocation {...props} />
       <PyramidLocation {...props} />
+      <DestroyedLocation {...props} />
     </>
   )
 }
@@ -113,6 +114,15 @@ const DeckLocation: FC<MaterialHelpProps> = ({ item }) => {
   )
 }
 
+const DestroyedLocation: FC<MaterialHelpProps> = ({ item }) => {
+  const rules = useRules<BorealRules>()!
+  if (item.location?.type !== LocationType.Destroyed) return null
+  const deckLength = rules.material(MaterialType.Card).location(LocationType.Deck).length
+  return (
+    <Trans defaults="help.card.destroyed" values={{ number: deckLength }}/>
+  )
+}
+
 const ReserveLocation: FC<MaterialHelpProps> = (props) => {
   const { item } = props
   const me = usePlayerId()
@@ -121,10 +131,14 @@ const ReserveLocation: FC<MaterialHelpProps> = (props) => {
   if (item.location?.type !== LocationType.Reserve) return null
 
   if (me && player === me) {
-    return <><hr /><Trans defaults="help.card.reserve.you" /></>
+    return <>
+      <hr/>
+      <Trans defaults="help.card.reserve.you"/></>
   }
 
-  return <><hr /><Trans defaults="help.card.reserve.player" values={{ player: name }} /></>
+  return <>
+    <hr/>
+    <Trans defaults="help.card.reserve.player" values={{ player: name }}/></>
 }
 
 const PyramidLocation: FC<MaterialHelpProps> = ({ item }) => {
@@ -134,10 +148,14 @@ const PyramidLocation: FC<MaterialHelpProps> = ({ item }) => {
   if (item.location?.type !== LocationType.Pyramid) return null
 
   if (me && player === me) {
-    return <><hr /><Trans defaults="help.card.pyramid.you" /></>
+    return <>
+      <hr/>
+      <Trans defaults="help.card.pyramid.you"/></>
   }
 
-  return <><hr /><Trans defaults="help.card.pyramid.player" values={{ player: name }} /></>
+  return <>
+    <hr/>
+    <Trans defaults="help.card.pyramid.player" values={{ player: name }}/></>
 }
 
 const getVictoryPointText = (effect: VictoryPointEffects) => {
