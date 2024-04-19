@@ -1,4 +1,4 @@
-import { isMoveItemType, isStartRule, ItemMove, Material, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItemType, isSelectItemType, isStartRule, ItemMove, Material, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
 import { isArchive } from '../material/Card'
 import { Cards } from '../material/CardDescription'
 import { LocationType } from '../material/LocationType'
@@ -18,8 +18,20 @@ export class DiscoverRule extends PlayerTurnRule {
     return moves
   }
 
+  beforeItemMove(move: ItemMove) {
+    if (isSelectItemType(MaterialType.Card)(move)) {
+      const selected = this.material(MaterialType.Card).selected()
+      if (selected.length) {
+        delete selected.getItem()!.selected
+      }
+    }
+
+    return []
+  }
+
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.Pyramid) return []
+    delete this.material(MaterialType.Card).getItem(move.itemIndex)?.selected
     const moves: MaterialMove[] = []
     moves.push(...this.getPaymentMoves(move))
     moves.push(...new BoardHelper(this.game).refillBoardMoves)

@@ -6,7 +6,8 @@ import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { PyramidHelper } from '@gamepark/boreal/rules/helper/PyramidHelper'
 import { RuleId } from '@gamepark/boreal/rules/RuleId'
 import { LocationContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
-import { Location, MaterialGame, MaterialRules } from '@gamepark/rules-api'
+import { isMoveItemType, Location, MaterialGame, MaterialMove, MaterialRules } from '@gamepark/rules-api'
+import equal from 'fast-deep-equal'
 import { borealCardDescription } from '../../material/BorealCardDescription'
 
 export class PyramidDescription extends LocationDescription {
@@ -87,5 +88,16 @@ export class PyramidDescription extends LocationDescription {
 
       this.deltaX[player] = (maxX - minX) / 4 + (minX / 2)
     }
+  }
+
+  canShortClick(move: MaterialMove, location: Location, context: MaterialContext): boolean {
+    const { rules } = context
+    if (!isMoveItemType(MaterialType.Card)(move)) return false
+    if (move.location.type === LocationType.Pyramid) {
+      const selected = !!rules.material(MaterialType.Card).getItem(move.itemIndex)!.selected
+      return selected && equal(location, move.location)
+    }
+
+    return false
   }
 }

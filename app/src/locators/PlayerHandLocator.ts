@@ -1,8 +1,22 @@
-import { HandLocator } from '@gamepark/react-game'
+import { HandLocator, ItemContext } from '@gamepark/react-game'
+import { MaterialItem } from '@gamepark/rules-api/dist/material/items/MaterialItem'
 
 export class PlayerHandLocator extends HandLocator {
+
   getCoordinates() {
     return { x: 0, y: -7, z: 0 }
+  }
+
+  getPosition(item: MaterialItem, context: ItemContext) {
+    const position = super.getPosition(item, context)
+
+    if (item.selected) {
+      position.x -= 1
+      position.y -= 1
+      position.z += 10
+    }
+
+    return position
   }
 
   getGapMaxAngle(): number {

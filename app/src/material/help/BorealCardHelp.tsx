@@ -13,6 +13,7 @@ import GreenIcon from '../../images/icons/green.jpg'
 import RedIcon from '../../images/icons/red.jpg'
 import YellowIcon from '../../images/icons/yellow.jpg'
 import Compass from '../../images/tokens/compass.jpg'
+import { BorealCardButton } from './buttons/BorealCardButton'
 
 export const BorealCardHelp: FC<MaterialHelpProps> = (props) => {
   const { item } = props
@@ -21,6 +22,7 @@ export const BorealCardHelp: FC<MaterialHelpProps> = (props) => {
   return (
     <>
       <h2>{t(getCardTitle(item))}</h2>
+      <BorealCardButton {...props} />
       <VisibleBorealCardHelp {...props} />
     </>
   )

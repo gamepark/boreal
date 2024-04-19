@@ -1,4 +1,4 @@
-import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItemType, isSelectItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { RuleId } from './RuleId'
@@ -28,7 +28,14 @@ export class InvertPyramidCardsRule extends PlayerTurnRule {
   }
 
   beforeItemMove(move: ItemMove) {
+    if (isSelectItemType(MaterialType.Card)(move)) {
+      const selected = this.material(MaterialType.Card).selected()
+      if (selected.length) {
+        delete selected.getItem()!.selected
+      }
+    }
     if (!isMoveItemType(MaterialType.Card)(move)) return []
+    delete this.material(MaterialType.Card).getItem(move.itemIndex)?.selected
     const movedItem = this.material(MaterialType.Card).getItem(move.itemIndex)!
     const itemOnThisPlace = this
       .material(MaterialType.Card)

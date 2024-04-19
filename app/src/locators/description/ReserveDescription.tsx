@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
-import { LocationContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
+import { MaterialType } from '@gamepark/boreal/material/MaterialType'
+import { isLocationSubset, LocationContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { isMoveItemType, Location, MaterialMove } from '@gamepark/rules-api'
 import { Trans } from 'react-i18next'
 import { borealCardDescription } from '../../material/BorealCardDescription'
 
@@ -30,7 +31,7 @@ export class ReserveDescription extends LocationDescription {
 
   getCoordinates(location: Location, context: LocationContext) {
     const coordinates = this.getReserveCoordinate(location, context)
-    coordinates.z = 20
+    coordinates.z = 0
     coordinates.y += 12.75
     return coordinates
   }
@@ -50,6 +51,21 @@ export class ReserveDescription extends LocationDescription {
       </div>
     )
   }
+
+  canShortClick(move: MaterialMove, location: Location, context: MaterialContext): boolean {
+    const { rules } = context
+    if (!isMoveItemType(MaterialType.Card)(move)) return false
+    if (move.location.type === LocationType.Reserve) {
+      const selected = !!rules.material(MaterialType.Card).getItem(move.itemIndex)!.selected
+      return selected && isLocationSubset(move.location, location)
+    }
+
+    return false
+  }
+
+  canLongClick(): boolean {
+    return false
+  }
 }
 
 const reserveTextCss = css`
@@ -63,5 +79,6 @@ const reserveTextCss = css`
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  font-size: 2em
+  font-size: 2em;
+  font-weight: bold
 `

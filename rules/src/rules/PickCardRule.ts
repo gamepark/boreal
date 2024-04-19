@@ -20,6 +20,7 @@ export class PickCardRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location?.type !== LocationType.Reserve) return []
+    delete this.material(MaterialType.Card).getItem(move.itemIndex)?.selected
     return [
       ...this.hand.moveItems({ type: LocationType.Deck, x: 0 }),
       this.rules().startRule(RuleId.Rest)

@@ -17,4 +17,11 @@ export class ExploreRule extends PlayerTurnRule {
       ...new ReserveRule(this.game).afterItemMove(move)
     ]
   }
+
+  beforeItemMove(move: ItemMove) {
+    return [
+      ...new DiscoverRule(this.game).beforeItemMove(move),
+      ...new ReserveRule(this.game).beforeItemMove(move)
+    ]
+  }
 }

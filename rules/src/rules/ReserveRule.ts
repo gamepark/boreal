@@ -1,4 +1,4 @@
-import { isMoveItemType, ItemMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItemType, isSelectItemType, ItemMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { isArchive } from '../material/Card'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
@@ -21,8 +21,20 @@ export class ReserveRule extends PlayerTurnRule {
     })
   }
 
+  beforeItemMove(move: ItemMove) {
+    if (isSelectItemType(MaterialType.Card)(move)) {
+      const selected = this.material(MaterialType.Card).selected()
+      if (selected.length) {
+        delete selected.getItem()!.selected
+      }
+    }
+
+    return []
+  }
+
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.Reserve) return []
+    delete this.material(MaterialType.Card).getItem(move.itemIndex)?.selected
     return [
       ...new BoardHelper(this.game).refillBoardMoves,
       this.rules().startRule(RuleId.Rest)
