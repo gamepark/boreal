@@ -112,12 +112,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         filter: (move, game) => isMoveItemType(MaterialType.Card)(move)
           && move.location.type === LocationType.Pyramid
           && game.items[move.itemType]![move.itemIndex].id?.front === Card.BlueStart2,
-        interrupt: (move) => isStartRule(move) && move.id === RuleId.Rest
+        interrupt: isMoveItemType(MaterialType.ExplorationToken)
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.compass"><strong/></Trans>,
+        text: () => <Trans defaults="tuto.cost"><strong/></Trans>,
         position: { y: -15 }
       },
       focus: (game) => ({
@@ -136,6 +136,22 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           bottom: 2
         }
       })
+    },
+    {
+      popup: {
+        text: () => <Trans defaults="tuto.pay"><strong/></Trans>,
+        position: { y: 15 }
+      },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.ExplorationToken).id(PlayerColor.White)
+        ],
+        scale: 0.5,
+        margin: { bottom: 10 }
+      }),
+      move: {
+        interrupt: isMoveItemType(MaterialType.ExplorationToken)
+      }
     },
     {
       popup: {
@@ -176,14 +192,21 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
           bottom: 2,
           left: 6.2
         }
-      }),
-      move: {}
+      })
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.arrow.moved"><strong/></Trans>,
+        text: () => <Trans defaults="tuto.rest.gain"><strong/></Trans>,
         position: { y: 10 }
-      }
+      },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.ExplorationToken).id(PlayerColor.White)
+        ],
+        scale: 0.5,
+        margin: { bottom: 10 }
+      }),
+      move: {}
     },
     {
       popup: {
