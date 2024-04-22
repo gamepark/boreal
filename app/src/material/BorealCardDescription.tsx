@@ -134,8 +134,8 @@ export class BorealCardDescription extends CardDescription {
         left: 0;
         color: white;
         transform: translateZ(10px);
-        background-size: 43% 43%;
         background: url(${Savior}) no-repeat 50% 55%;
+        background-size: 43% 43%;
       }
     `
   }
