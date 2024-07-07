@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { ItemContext, LineLocator } from '@gamepark/react-game'
+import { PlayerColor } from '@gamepark/boreal/PlayerColor'
+import { ItemContext, LineLocator, SortFunction } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
 import { borealCardDescription } from '../material/BorealCardDescription'
 import { BoardCardDescription } from './description/BoardCardDescription'
@@ -23,6 +24,13 @@ export class BoardCardLocator extends LineLocator {
 
   getItemIndex(item: MaterialItem, context: ItemContext): number {
     return this.locationDescription.getIndex(item.location, context)
+  }
+
+  getNavigationSorts(context: ItemContext): SortFunction[] {
+    const { player} = context
+    if (player === PlayerColor.Black) return [(item) => -item.location.x!]
+    return super.getNavigationSorts(context)
+
   }
 }
 
