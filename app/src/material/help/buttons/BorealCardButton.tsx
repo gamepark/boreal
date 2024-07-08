@@ -13,6 +13,7 @@ export const BorealCardButton: FC<MaterialHelpProps> = (props) => {
   return (
     <>
       <SelectCardButton { ...props } />
+      <ReserveCardButton { ...props } />
       <DestroyCardButton { ...props } />
       <InverseCardButton { ...props } />
     </>
@@ -23,13 +24,27 @@ const SelectCardButton: FC<MaterialHelpProps> = (props) => {
   const { closeDialog, item, itemIndex } = props
   const rules = useRules<BorealRules>()!
   const { t } = useTranslation()
-  const move = useLegalMove((move) => isMoveItemType(MaterialType.Card)(move) && (move.location?.type === LocationType.Pyramid || move.location?.type === LocationType.Reserve || move.location?.type === LocationType.BoardCard) && move.itemIndex === itemIndex)
+  const move = useLegalMove((move) => isMoveItemType(MaterialType.Card)(move) && (move.location?.type === LocationType.Pyramid || move.location?.type === LocationType.BoardCard) && move.itemIndex === itemIndex)
 
   if (!move || item.selected) return null
 
   return (
     <PlayMoveButton move={rules.material(MaterialType.Card).index(move.itemIndex).selectItem()} local onPlay={closeDialog} css={marginCss}>
       {t('move.card.select')}
+    </PlayMoveButton>
+  )
+}
+
+const ReserveCardButton: FC<MaterialHelpProps> = (props) => {
+  const { closeDialog, itemIndex } = props
+  const { t } = useTranslation()
+  const move = useLegalMove((move) => isMoveItemType(MaterialType.Card)(move) && move.location?.type === LocationType.Reserve && move.itemIndex === itemIndex)
+
+  if (!move) return null
+
+  return (
+    <PlayMoveButton move={move} onPlay={closeDialog} css={marginCss}>
+      {t('move.card.reserve')}
     </PlayMoveButton>
   )
 }

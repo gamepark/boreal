@@ -11,6 +11,7 @@ export class ReserveDescription extends LocationDescription {
   height = borealCardDescription.height
   width = borealCardDescription.width
   borderRadius = borealCardDescription.borderRadius
+  alwaysVisible = true
 
   getLocations(context: MaterialContext) {
     const { player } = context
