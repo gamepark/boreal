@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
-import { ItemContext, TokenDescription } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api'
-import WhiteArrow from '../images/tokens/white_arrow.jpg'
+import { TokenDescription } from '@gamepark/react-game'
+import BlackPanelBG from '../images/panel/black_player.jpg'
+import WhitePanelBG from '../images/panel/white_player.jpg'
 import BlackArrow from '../images/tokens/black_arrow.jpg'
 import Compass from '../images/tokens/compass.jpg'
 import VictoryPoint from '../images/tokens/victory-point.png'
-import WhitePanelBG from '../images/panel/white_player.jpg'
-import BlackPanelBG from '../images/panel/black_player.jpg'
+import WhiteArrow from '../images/tokens/white_arrow.jpg'
 import { ExplorationTokenHelp } from './help/ExplorationTokenHelp'
 
 export class ExplorationTokenDescription extends TokenDescription {
@@ -17,14 +16,6 @@ export class ExplorationTokenDescription extends TokenDescription {
   images = {
     [PlayerColor.White]: WhiteArrow,
     [PlayerColor.Black]: BlackArrow,
-  }
-
-  getRotateZ(item: MaterialItem, _context: ItemContext): number {
-    if (item.id === PlayerColor.White) {
-      return 0
-    }
-
-    return 180
   }
 
   getImages(): string[] {
