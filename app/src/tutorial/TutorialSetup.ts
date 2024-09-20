@@ -1,5 +1,5 @@
 import { BorealSetup } from '@gamepark/boreal/BorealSetup'
-import { Card, CardBack, isArchive, startingLocations } from '@gamepark/boreal/material/Card'
+import { Card, CardBack, CardId, isArchive, startingLocations } from '@gamepark/boreal/material/Card'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import sampleSize from 'lodash/sampleSize'
@@ -30,19 +30,18 @@ export class TutorialSetup extends BorealSetup {
 
   setupStandardLocations() {
     super.setupStandardLocations()
-    const deck= this.material(MaterialType.Card).location(LocationType.Deck).deck()
-    const length = deck.length
-    deck.id(({front}: any) => front === Card.Green6).moveItem({
-      type: LocationType.Deck,
-      x: length - 2
-    })
-    deck.id(({front}: any) => front === Card.Yellow6).moveItem({
-      type: LocationType.Deck,
-      x: length - 2
-    })
-    deck.id(({front}: any) => isArchive(front)).moveItem({
-      type: LocationType.Deck,
-      x: length - 5
-    })
+    const deck = this.material(MaterialType.Card).location(LocationType.Deck).deck()
+
+    const yellow6 = deck.id<CardId>(id => id.front === Card.Yellow6)
+    const green6 = deck.id<CardId>(id => id.front === Card.Green6)
+    const archive = deck.id<CardId>(id => isArchive(id.front!))
+
+    yellow6.moveItem({ type: LocationType.Deck, x: 0 })
+    green6.moveItem({ type: LocationType.Deck, x: 0 })
+    archive.moveItem({ type: LocationType.Deck, x: 0 })
+
+    yellow6.moveItem({ type: LocationType.Deck, x: deck.length - 2 })
+    green6.moveItem({ type: LocationType.Deck, x: deck.length - 3 })
+    archive.moveItem({ type: LocationType.Deck, x: deck.length - 5 })
   }
 }
