@@ -32,15 +32,15 @@ export class EffectHelper extends PlayerTurnRule {
   getRuleMoves(effect: Effect) {
     switch (effect.type) {
       case EffectType.InvertBoardCards:
-        return [this.rules().startRule(RuleId.InvertBoardCards)]
+        return [this.startRule(RuleId.InvertBoardCards)]
       case EffectType.InvertPyramidCards:
-        return [this.rules().startRule(RuleId.InvertPyramidCards)]
+        return [this.startRule(RuleId.InvertPyramidCards)]
       case EffectType.Reserve:
-        return [this.rules().startRule(RuleId.Reserve)]
+        return [this.startRule(RuleId.Reserve)]
       case EffectType.Remove:
-        return [this.rules().startRule(RuleId.Remove)]
+        return [this.startRule(RuleId.Remove)]
       case EffectType.Pick:
-        return [this.rules().startRule(RuleId.Pick)]
+        return [this.startRule(RuleId.Pick)]
     }
 
     return []

@@ -20,7 +20,7 @@ export class PyramidDescription extends DropAreaDescription {
   canShortClick(move: MaterialMove, location: Location, { rules }: MaterialContext): boolean {
     if (!isMoveItemType(MaterialType.Card)(move)) return false
     if (move.location.type === LocationType.Pyramid) {
-      const selected = !!rules.material(MaterialType.Card).getItem(move.itemIndex)!.selected
+      const selected = !!rules.material(MaterialType.Card).getItem(move.itemIndex).selected
       return selected && equal(location, move.location)
     }
     return false

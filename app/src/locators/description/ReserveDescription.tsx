@@ -24,7 +24,7 @@ export class ReserveDescription extends DropAreaDescription {
     const { rules } = context
     if (!isMoveItemType(MaterialType.Card)(move)) return false
     if (move.location.type === LocationType.Reserve) {
-      const selected = !!rules.material(MaterialType.Card).getItem(move.itemIndex)!.selected
+      const selected = !!rules.material(MaterialType.Card).getItem(move.itemIndex).selected
       return selected && isLocationSubset(move.location, location)
     }
     return false

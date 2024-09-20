@@ -373,7 +373,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
         player: me,
         filter: (move, game) => isMoveItemType(MaterialType.Card)(move)
           && move.location.type === LocationType.Reserve
-          && this.material(game, MaterialType.Card).getItem(move.itemIndex)?.id?.front === Card.Yellow6,
+          && this.material(game, MaterialType.Card).getItem(move.itemIndex).id?.front === Card.Yellow6,
         interrupt: (move) => isStartRule(move) && move.id === RuleId.Rest
       }
     },

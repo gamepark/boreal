@@ -1,4 +1,4 @@
-import { isEnumValue } from '@gamepark/rules-api'
+import { getEnumValues } from '@gamepark/rules-api'
 
 export enum Card {
   YellowStart1 = 1,
@@ -55,14 +55,14 @@ export enum CardFamily {
   Archive
 }
 
-export const families = Object.values(CardFamily).filter(isEnumValue)
+export const families = getEnumValues(CardFamily)
 
 export enum CardBack {
   Starting = 1,
   Standard
 }
 
-export const cards = Object.values(Card).filter(isEnumValue)
+export const cards = getEnumValues(Card)
 
 export const isArchive = (card: Card) => card >= 50
 export const archives = cards.filter(isArchive)

@@ -8,7 +8,7 @@ export class PickCardRule extends PlayerTurnRule {
 
   onRuleStart() {
     const deck = this.deck
-    if (deck.length < 3) return [this.rules().startRule(RuleId.Rest)]
+    if (deck.length < 3) return [this.startRule(RuleId.Rest)]
     return this.deck.deal({ type: LocationType.Hand, player: this.player }, 3)
   }
 
@@ -24,10 +24,10 @@ export class PickCardRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location?.type !== LocationType.Reserve) return []
-    delete this.material(MaterialType.Card).getItem(move.itemIndex)?.selected
+    delete this.material(MaterialType.Card).getItem(move.itemIndex).selected
     return [
       ...this.hand.moveItems({ type: LocationType.Deck, x: 0 }),
-      this.rules().startRule(RuleId.Rest)
+      this.startRule(RuleId.Rest)
     ]
   }
 

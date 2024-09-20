@@ -8,7 +8,7 @@ export class RemoveBoardCardRule extends PlayerTurnRule {
 
   onRuleStart() {
     const boardCards = this.boardCards
-    if (!boardCards.length) return [this.rules().startRule(RuleId.Rest)]
+    if (!boardCards.length) return [this.startRule(RuleId.Rest)]
     return []
   }
   getPlayerMoves(): MaterialMove<number, number, number>[] {
@@ -22,7 +22,7 @@ export class RemoveBoardCardRule extends PlayerTurnRule {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.Destroyed) return []
     return [
       ...new BoardHelper(this.game).refillBoardMoves,
-      this.rules().startRule(RuleId.Rest)
+      this.startRule(RuleId.Rest)
     ]
   }
 

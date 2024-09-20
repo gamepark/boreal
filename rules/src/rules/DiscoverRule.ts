@@ -31,7 +31,7 @@ export class DiscoverRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.Card)(move) || move.location.type !== LocationType.Pyramid) return []
-    delete this.material(MaterialType.Card).getItem(move.itemIndex)?.selected
+    delete this.material(MaterialType.Card).getItem(move.itemIndex).selected
     const moves: MaterialMove[] = []
     moves.push(...this.getPaymentMoves(move))
     moves.push(...new BoardHelper(this.game).refillBoardMoves)
@@ -42,12 +42,12 @@ export class DiscoverRule extends PlayerTurnRule {
       return moves
     }
 
-    moves.push(this.rules().startRule(RuleId.Rest))
+    moves.push(this.startRule(RuleId.Rest))
     return moves
   }
 
   getPaymentMoves(move: MoveItem) {
-    const item = this.material(MaterialType.Card).getItem(move.itemIndex)!
+    const item = this.material(MaterialType.Card).getItem(move.itemIndex)
     const cost = Cards[item.id.front].cost ?? 0
     if (!cost) return []
     return this
@@ -62,7 +62,7 @@ export class DiscoverRule extends PlayerTurnRule {
   getPlaceMoves(cards: Material) {
     const moves: MaterialMove[] = []
     for (const cardIndex of cards.getIndexes()) {
-      const item = cards.getItem(cardIndex)!
+      const item = cards.getItem(cardIndex)
       const description = Cards[item.id.front]
       const cost = description.cost ?? 0
       if (!this.canBeBought(cost, item)) continue

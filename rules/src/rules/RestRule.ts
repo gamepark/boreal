@@ -21,12 +21,12 @@ export class RestRule extends PlayerTurnRule {
 
     if (this.isOnePyramidCompleted && this.player === PlayerColor.Black) {
       return [
-        this.rules().endGame()
+        this.endGame()
       ]
     }
 
     moves.push(
-      this.rules().startPlayerTurn(RuleId.Explore, this.nextPlayer)
+      this.startPlayerTurn(RuleId.Explore, this.nextPlayer)
     )
 
     return moves
