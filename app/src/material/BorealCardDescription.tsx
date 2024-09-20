@@ -62,12 +62,10 @@ import { BorealCardHelp } from './help/BorealCardHelp'
 export class BorealCardDescription extends CardDescription {
   height = 7
   width = 7
-  borderRadius = 0.3
 
   backImages = {
     [CardBack.Starting]: StartBack,
-    [CardBack.Standard]: StandardBack,
-
+    [CardBack.Standard]: StandardBack
   }
 
   images = {

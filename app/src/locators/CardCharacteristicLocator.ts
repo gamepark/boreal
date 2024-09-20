@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
-import { ItemLocator, LocationDescription } from '@gamepark/react-game'
+import { LocationDescription, Locator } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 
 export enum Characteristic {
@@ -9,27 +9,27 @@ export enum Characteristic {
 
 class CardCharacteristicDescription extends LocationDescription {
 
-  getBorderRadius(location: Location) {
-    if (location.id === Characteristic.Cost) return 0.2
-    if (location.id === Characteristic.Savior) return 0.2
-    if (location.id === Characteristic.RestBonus) return 1
-    if (location.id === Characteristic.Effect) return 0.2
-    return 0
+  getBorderRadius(id: Characteristic) {
+    return id === Characteristic.RestBonus ? 1 : 0.2
   }
 
-
-  getSize(location: Location) {
-    if (location.id === Characteristic.Cost) return { height: 1.2, width: 1.5 }
-    if (location.id === Characteristic.Savior) return { height: 1.5, width: 1.5 }
-    if (location.id === Characteristic.RestBonus) return { height: 2, width: 2 }
-    if (location.id === Characteristic.Effect) return { height: 1.5, width: 3 }
-    return { height: 0, width: 0 }
+  getSize(id: Characteristic) {
+    switch (id) {
+      case Characteristic.Cost:
+        return { height: 1.2, width: 1.5 }
+      case Characteristic.Savior:
+        return { height: 1.5, width: 1.5 }
+      case Characteristic.RestBonus:
+        return { height: 2, width: 2 }
+      case Characteristic.Effect:
+        return { height: 1.5, width: 3 }
+    }
   }
 }
 
 export const cardCharacteristicDescription = new CardCharacteristicDescription()
 
-export class CardCharacteristicLocator extends ItemLocator {
+export class CardCharacteristicLocator extends Locator {
   locationDescription = cardCharacteristicDescription
   parentItemType = MaterialType.Card
 

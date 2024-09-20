@@ -27,19 +27,20 @@ export const PlayerPanels: FC<any> = () => {
   return createPortal(
     <>
       {players.map((player) => {
-        const mainCounter = !isEnded? {
-          image: Compass,
-          value: '+' + new PyramidHelper(rules.game, player.id).restBonus ?? 0,
-          imageCss: css`border-radius: 5em;`
-        }: {
-          image: VictoryPoint,
-          value: new ScoreHelper(rules.game, player.id).totalScore,
-          imageCss: css`border: 0; background-size: contain`
-        }
+          const mainCounter = !isEnded ? {
+            image: Compass,
+            value: '+' + new PyramidHelper(rules.game, player.id).restBonus ?? 0,
+            imageCss: css`border-radius: 5em;`
+          } : {
+            image: VictoryPoint,
+            value: new ScoreHelper(rules.game, player.id).totalScore,
+            imageCss: css`border: 0;
+              background-size: contain`
+          }
           return <StyledPlayerPanel
             key={player.id}
             player={player}
-            backgroundImage={player.id === PlayerColor.White ? BlackPanelBG : WhitePanelBG}
+            backgroundImage={player.id === PlayerColor.White ? WhitePanelBG : BlackPanelBG}
             css={[panelPosition, player.id === (playerId ?? rules.players[0]) ? leftPosition : rightPosition]}
             mainCounter={mainCounter}
           />
@@ -55,9 +56,9 @@ const panelPosition = css`
 `
 
 const leftPosition = css`
-left: 1em;
+  left: 1em;
 `
 
 const rightPosition = css`
-right: 1em;
+  right: 1em;
 `

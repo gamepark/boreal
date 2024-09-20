@@ -5,8 +5,8 @@ import Board from '../images/board/board.jpg'
 import { GameBoardHelp } from './help/GameBoardHelp'
 
 export class GameBoardDescription extends BoardDescription {
-  height = 11
-  width = 70.015
+  height = 70
+  width = 11
 
   staticItem = {
     location: {

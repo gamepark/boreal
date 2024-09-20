@@ -1,29 +1,25 @@
 /** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
-import { ItemContext, ItemLocator, MaterialContext } from '@gamepark/react-game'
-import { Location, MaterialItem, XYCoordinates } from '@gamepark/rules-api'
+import { ListLocator, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 
-export class BoardTokenLocator extends ItemLocator {
+class BoardTokenLocator extends ListLocator {
   parentItemType = MaterialType.Board
 
-  getPositionOnParent(location: Location, _context: MaterialContext): XYCoordinates {
-    const deltaX = (location.x === 1? 8.3: (8.3 + ((location.x! - 1) * 11.05)))
+  getPositionOnParent(location: Location, _context: MaterialContext) {
+    const deltaY = (location.x === 1 ? 8.3 : (8.3 + ((location.x! - 1) * 11.05)))
     if (location.id === PlayerColor.White) {
-      const coordinates = { x: 2.5, y: 117 }
+      const coordinates = { x: -17, y: 2.5 }
       if (!location.x) return coordinates
-      coordinates.x += deltaX
+      coordinates.y += deltaY
       return coordinates
     }
 
-    const coordinates = { x: 97.55, y: -17 }
+    const coordinates = { x: 117, y: 97.55 }
     if (!location.x) return coordinates
-    coordinates.x -= deltaX
+    coordinates.y -= deltaY
     return coordinates
-  }
-
-  getRotateZ(item: MaterialItem, _context: ItemContext): number {
-    return item.id === PlayerColor.White ? 0 : 180
   }
 }
 

@@ -18,7 +18,7 @@ const me = PlayerColor.White
 const opponent = PlayerColor.Black
 
 export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, LocationType> {
-  version = 1
+  version = 2
   options = { players: [{ id: me }, { id: opponent }] }
   setup = new TutorialSetup()
 

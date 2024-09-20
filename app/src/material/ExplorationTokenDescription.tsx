@@ -10,12 +10,13 @@ import WhiteArrow from '../images/tokens/white_arrow.jpg'
 import { ExplorationTokenHelp } from './help/ExplorationTokenHelp'
 
 export class ExplorationTokenDescription extends TokenDescription {
-  height = 3
-  width = 3.5
+  height = 3.5
+  width = 3
+  borderRadius = 0.3
 
   images = {
     [PlayerColor.White]: WhiteArrow,
-    [PlayerColor.Black]: BlackArrow,
+    [PlayerColor.Black]: BlackArrow
   }
 
   getImages(): string[] {
