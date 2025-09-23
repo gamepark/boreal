@@ -2,6 +2,7 @@
   "name": "@gamepark/boreal",
   "version": "1.0.1",
   "description": "The rules of Boreal adapted for Game Park",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
