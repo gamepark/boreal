@@ -1,5 +1,5 @@
-import { families } from '../../../material/Card'
-import { Cards } from '../../../material/CardDescription'
+import { CardId, families } from '../../../material/Card'
+import { getCardDescription } from '../../../material/CardDescription'
 import { LocationType } from '../../../material/LocationType'
 import { MaterialType } from '../../../material/MaterialType'
 import { FamilyMajority } from '../../../material/VictoryPointCondition'
@@ -15,7 +15,7 @@ export class FamilyMajorityRule extends VictoryPointEffectRule<FamilyMajority> {
     let count = 0
     const pyramid = this.pyramid
     for (const family of families) {
-      const familyCards = pyramid.filter((item) => Cards[item.id.front].families?.includes(family)).length
+      const familyCards = pyramid.filter<CardId>((item) => !!getCardDescription(item.id.front).families?.includes(family)).length
 
       let hasOtherPlayerWithMore = false
       for (const otherPlayer of this.game.players) {
@@ -24,7 +24,7 @@ export class FamilyMajorityRule extends VictoryPointEffectRule<FamilyMajority> {
           .material(MaterialType.Card)
           .location(LocationType.Pyramid)
           .player(otherPlayer)
-          .filter((item) => Cards[item.id.front].families?.includes(family))
+          .filter<CardId>((item) => !!getCardDescription(item.id.front).families?.includes(family))
           .length
 
         if (otherFamilyCards >= familyCards) {

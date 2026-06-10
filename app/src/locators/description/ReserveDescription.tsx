@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
@@ -15,7 +14,7 @@ export class ReserveDescription extends DropAreaDescription {
   content = () => {
     return (
       <div css={reserveTextCss}>
-        <Trans defaults="help.reserve.text"/>
+        <Trans i18nKey="help.reserve.text"/>
       </div>
     )
   }
@@ -25,7 +24,7 @@ export class ReserveDescription extends DropAreaDescription {
     if (!isMoveItemType(MaterialType.Card)(move)) return false
     if (move.location.type === LocationType.Reserve) {
       const selected = !!rules.material(MaterialType.Card).getItem(move.itemIndex).selected
-      return selected && isLocationSubset(move.location, location)
+      return selected && isLocationSubset(move.location as Location, location)
     }
     return false
   }

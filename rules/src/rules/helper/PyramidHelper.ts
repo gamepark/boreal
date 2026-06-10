@@ -1,6 +1,7 @@
 import { MaterialGame, MaterialRulesPart, XYCoordinates } from '@gamepark/rules-api'
-import sum from 'lodash/sum'
-import { Cards } from '../../material/CardDescription'
+import { sum } from 'es-toolkit'
+import { CardId } from '../../material/Card'
+import { getCardDescription } from '../../material/CardDescription'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { PlayerColor } from '../../PlayerColor'
@@ -33,7 +34,7 @@ export class PyramidHelper extends MaterialRulesPart {
 
   get restBonus() {
     const nonCoveredCards = this.nonCoveredPyramidCards
-    return sum(nonCoveredCards.getItems().map((item) => Cards[item.id.front]?.restBonus ?? 0))
+    return sum(nonCoveredCards.getItems<CardId>().map((item) => getCardDescription(item.id.front).restBonus ?? 0))
   }
 
   get nonCoveredPyramidCards() {

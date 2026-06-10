@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { ItemContext, ListLocator, MaterialContext, SortFunction } from '@gamepark/react-game'

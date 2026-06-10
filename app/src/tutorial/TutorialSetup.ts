@@ -2,7 +2,7 @@ import { BorealSetup } from '@gamepark/boreal/BorealSetup'
 import { Card, CardBack, CardId, isArchive, startingLocations } from '@gamepark/boreal/material/Card'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
-import sampleSize from 'lodash/sampleSize'
+import { sampleSize } from 'es-toolkit'
 
 export class TutorialSetup extends BorealSetup {
 

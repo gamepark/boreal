@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { MaterialHelpProps, shadowCss, usePlayerName } from '@gamepark/react-game'
 import { FC } from 'react'
@@ -12,7 +11,7 @@ export const ExplorationTokenHelp: FC<MaterialHelpProps> = (props) => {
     <>
       <h2>{t('help.token', { player: name })}</h2>
       <p css={textWithIconCss}>
-        <Trans defaults="help.token.rules" values={{ player: name }}>
+        <Trans i18nKey="help.token.rules" values={{ player: name }}>
           <span css={iconCss(Compass)}/>
         </Trans>
       </p>
@@ -35,5 +34,5 @@ const iconCss = (icon: string) => css`
   height: 1.4em;
   width: 1.4em;
   margin-left: 0.3em;
-  ${shadowCss(icon)}
+  ${shadowCss}
 `

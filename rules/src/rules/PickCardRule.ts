@@ -1,5 +1,5 @@
 import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
-import { isArchive } from '../material/Card'
+import { CardId, isArchive } from '../material/Card'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { RuleId } from './RuleId'
@@ -15,7 +15,7 @@ export class PickCardRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     return this
       .hand
-      .id(({ front }: any) => !this.hasArchive || !isArchive(front))
+      .id(({ front }: CardId) => !this.hasArchive || !isArchive(front!))
       .moveItems({
         type: LocationType.Reserve,
         player: this.player
@@ -47,7 +47,7 @@ export class PickCardRule extends PlayerTurnRule {
       .material(MaterialType.Card)
       .player(this.player)
       .location((l) => l.type !== LocationType.Hand)
-      .id(({ front }: any) => front && isArchive(front))
+      .id(({ front }: CardId) => !!front && isArchive(front))
       .length === 1
   }
 }

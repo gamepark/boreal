@@ -1,5 +1,5 @@
-import { CardFamily } from '../../../material/Card'
-import { Cards } from '../../../material/CardDescription'
+import { CardFamily, CardId } from '../../../material/Card'
+import { getCardDescription } from '../../../material/CardDescription'
 import { LocationType } from '../../../material/LocationType'
 import { MaterialType } from '../../../material/MaterialType'
 import { AdjacentDifferentFamily } from '../../../material/VictoryPointCondition'
@@ -25,10 +25,10 @@ export class AdjacentDifferentFamilyRule extends VictoryPointEffectRule<Adjacent
         index !== this.card.getIndex()
         && isAdjacent(item.location, this.card.getItem()!.location)
       )
-      .getItems()
+      .getItems<CardId>()
 
     for (const item of items) {
-      const cardFamilies: CardFamily[] = Cards[item.id.front].families ?? []
+      const cardFamilies: CardFamily[] = getCardDescription(item.id.front).families ?? []
       const matchingFamilies = cardFamilies.filter((f) => !adjacentDifferentFamilies.includes(f))
       if (matchingFamilies.length) {
         adjacentDifferentFamilies.push(...matchingFamilies)

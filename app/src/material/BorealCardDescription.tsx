@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme } from '@emotion/react'
 import { Card, CardBack } from '@gamepark/boreal/material/Card'
 import { LocationType } from '@gamepark/boreal/material/LocationType'

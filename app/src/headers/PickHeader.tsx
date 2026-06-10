@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { BorealRules } from '@gamepark/boreal/BorealRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { useTranslation } from 'react-i18next'

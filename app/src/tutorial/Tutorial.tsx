@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Card, CardId } from '@gamepark/boreal/material/Card'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
@@ -27,12 +26,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
   steps: TutorialStep[] = [
     {
       popup: {
-        text: () => <Trans defaults="tuto.welcome"><strong/></Trans>
+        text: () => <Trans i18nKey="tuto.welcome"><strong/></Trans>
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.goal">
+        text: () => <Trans i18nKey="tuto.goal">
           <strong/>
           <Picture src={victoryPoint} css={inlineIcon}/>
         </Trans>
@@ -40,7 +39,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.place.starting"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.place.starting"><strong/></Trans>,
         position: { y: 15 }
       },
       focus: (game) => ({
@@ -55,7 +54,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.exploration.token">
+        text: () => <Trans i18nKey="tuto.exploration.token">
           <strong/>
           <Picture src={compass} css={inlineIcon}/>
         </Trans>,
@@ -73,13 +72,13 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.exploration.phase"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.exploration.phase"><strong/></Trans>,
         position: { y: 10 }
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.discover"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.discover"><strong/></Trans>,
         position: { y: 23 }
       },
       focus: (game) => ({
@@ -94,11 +93,11 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.discover.place"><strong/></Trans>
+        text: () => <Trans i18nKey="tuto.discover.place"><strong/></Trans>
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.Card).location(LocationType.BoardCard).id(({ front }: any) => front === Card.BlueStart2),
+          this.material(game, MaterialType.Card).location(LocationType.BoardCard).id(({ front }: CardId) => front === Card.BlueStart2),
           this.material(game, MaterialType.ExplorationToken).id(PlayerColor.White)
         ],
         locations: [
@@ -118,7 +117,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.cost"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.cost"><strong/></Trans>,
         position: { y: -15 }
       },
       focus: (game) => ({
@@ -140,7 +139,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.pay"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.pay"><strong/></Trans>,
         position: { y: 15 }
       },
       focus: (game) => ({
@@ -156,7 +155,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.savior"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.savior"><strong/></Trans>,
         position: { y: -15 }
       },
       focus: (game) => ({
@@ -177,7 +176,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.rest.phase"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.rest.phase"><strong/></Trans>,
         position: { y: -15 }
       },
       focus: (game) => ({
@@ -197,7 +196,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.rest.gain"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.rest.gain"><strong/></Trans>,
         position: { y: 10 }
       },
       focus: (game) => ({
@@ -211,7 +210,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.opponent"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.opponent"><strong/></Trans>,
         position: { y: 10 }
       }
     },
@@ -225,7 +224,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.opponent.discover"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.opponent.discover"><strong/></Trans>,
         position: { y: 10 }
       },
       focus: (game) => ({
@@ -243,25 +242,25 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.place.help"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.place.help"><strong/></Trans>,
         position: { y: 10 }
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.opponent.rest"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.opponent.rest"><strong/></Trans>,
         position: { y: 10 }
       },
       move: {}
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.place.2"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.place.2"><strong/></Trans>,
         position: { y: 10 }
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.Card).location(LocationType.BoardCard).id(({ front }: any) => front === Card.GreenStart3),
+          this.material(game, MaterialType.Card).location(LocationType.BoardCard).id(({ front }: CardId) => front === Card.GreenStart3),
           this.material(game, MaterialType.ExplorationToken).id(PlayerColor.White)
         ],
         locations: [
@@ -282,7 +281,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.effect.left"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.effect.left"><strong/></Trans>,
         position: { y: -15 }
       },
       focus: (game) => ({
@@ -302,7 +301,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.bonus.0"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.bonus.0"><strong/></Trans>,
         position: { y: 10 }
       },
       move: {}
@@ -319,12 +318,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.opponent.2"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.opponent.2"><strong/></Trans>,
         position: { y: -10 }
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.Card).id((id: any) => id?.front === Card.YellowStart1)
+          this.material(game, MaterialType.Card).id((id: CardId) => id?.front === Card.YellowStart1)
         ],
         margin: {
           top: 2,
@@ -334,12 +333,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.reserve.1"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.reserve.1"><strong/></Trans>,
         position: { y: 20 }
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.Card).id((id: any) => id?.front === Card.Yellow6)
+          this.material(game, MaterialType.Card).id((id: CardId) => id?.front === Card.Yellow6)
         ],
         margin: {
           top: 2,
@@ -349,17 +348,17 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.reserve.2"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.reserve.2"><strong/></Trans>,
         position: { y: 10 }
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.reserve.place"><strong/></Trans>
+        text: () => <Trans i18nKey="tuto.reserve.place"><strong/></Trans>
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.Card).location(LocationType.BoardCard).id(({ front }: any) => front === Card.Yellow6)
+          this.material(game, MaterialType.Card).location(LocationType.BoardCard).id(({ front }: CardId) => front === Card.Yellow6)
         ],
         locations: [
           this.location(LocationType.Reserve).player(me).location
@@ -379,13 +378,13 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.reserve.free"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.reserve.free"><strong/></Trans>,
         position: { y: 10 }
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="help.card.archive.limit">
+        text: () => <Trans i18nKey="help.card.archive.limit">
           <strong/>
           <Picture src={archive} css={[inlineIcon, css`filter: drop-shadow(0em 0em 0.05em black) drop-shadow(0em 0em 0.05em black)`]}/>
         </Trans>,
@@ -403,7 +402,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.rest.2"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.rest.2"><strong/></Trans>,
         position: { y: 10 }
       },
       move: {}
@@ -418,13 +417,13 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.discover.reserve"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.discover.reserve"><strong/></Trans>,
         position: { y: 10 }
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.pyramid.max"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.pyramid.max"><strong/></Trans>,
         position: { x: 35 }
       },
       focus: (game) => ({
@@ -450,7 +449,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.pyamid.top"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.pyamid.top"><strong/></Trans>,
         position: { y: -24 }
       },
       focus: () => ({
@@ -467,12 +466,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.compass.ignored"><strong/></Trans>
+        text: () => <Trans i18nKey="tuto.compass.ignored"><strong/></Trans>
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.place.baseline"><strong/></Trans>
+        text: () => <Trans i18nKey="tuto.place.baseline"><strong/></Trans>
       },
       focus: (game) => ({
         materials: [
@@ -497,7 +496,7 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.effects"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.effects"><strong/></Trans>,
         position: { y: 10 }
       },
       focus: game => ({
@@ -510,12 +509,12 @@ export class Tutorial extends MaterialTutorial<PlayerColor, MaterialType, Locati
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.end.trigger"><strong/></Trans>
+        text: () => <Trans i18nKey="tuto.end.trigger"><strong/></Trans>
       }
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.go"><strong/></Trans>
+        text: () => <Trans i18nKey="tuto.go"><strong/></Trans>
       }
     }
   ]

@@ -1,5 +1,5 @@
 import { MaterialGameSetup } from '@gamepark/rules-api'
-import sampleSize from 'lodash/sampleSize'
+import { sampleSize } from 'es-toolkit'
 import { BorealOptions } from './BorealOptions'
 import { BorealRules } from './BorealRules'
 import { archives, CardBack, standardLocations, startingLocations } from './material/Card'

@@ -1,6 +1,6 @@
-import { Cards } from '../../../material/CardDescription'
+import { CardId } from '../../../material/Card'
+import { getCardDescription } from '../../../material/CardDescription'
 import { LeftCard, VictoryPointType } from '../../../material/VictoryPointCondition'
-import { ScoreHelper } from '../ScoreHelper'
 import { VictoryPointEffectRule } from './VictoryPointEffectRule'
 
 export class RightCardRule extends VictoryPointEffectRule<LeftCard> {
@@ -15,8 +15,8 @@ export class RightCardRule extends VictoryPointEffectRule<LeftCard> {
         && location.x === (item.location.x! + 2))
 
     if (rightCard.length) {
-      if (Cards[rightCard.getItem()!.id.front].victoryPointEffect?.type === VictoryPointType.LeftCard) return 0
-      return new ScoreHelper(this.game, this.player).getCardScore(rightCard)
+      if (getCardDescription(rightCard.getItem<CardId>()!.id.front).victoryPointEffect?.type === VictoryPointType.LeftCard) return 0
+      return this.scoreCard!(rightCard)
     }
     return 0
   }

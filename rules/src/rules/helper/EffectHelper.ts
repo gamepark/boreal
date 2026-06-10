@@ -1,5 +1,6 @@
 import { Material, MaterialGame, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
-import { Cards } from '../../material/CardDescription'
+import { CardId } from '../../material/Card'
+import { getCardDescription } from '../../material/CardDescription'
 import { Effect, EffectType, isOpponentLooseCompass, isWinCompassEffect } from '../../material/CardEffect'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
@@ -13,10 +14,10 @@ export class EffectHelper extends PlayerTurnRule {
   }
 
   get placementEffects(): Effect[] {
-    const item = this.card.getItem()!
+    const item = this.card.getItem<CardId>()!
     const id = item.id.front
     if (!id) return []
-    return Cards[id].placementEffects ?? []
+    return getCardDescription(id).placementEffects ?? []
   }
 
   get effectMoves(): MaterialMove[] {
@@ -48,8 +49,8 @@ export class EffectHelper extends PlayerTurnRule {
 
   getWinCompassMoves(effect: Effect) {
     if (!isWinCompassEffect(effect)) return []
-    const item = this.card.getItem()!
-    const cardCost = Cards[item.id.front].cost ?? 0
+    const item = this.card.getItem<CardId>()!
+    const cardCost = getCardDescription(item.id.front).cost ?? 0
     const playerCompass = this.getPlayerCompass(this.player) - cardCost
     const addedCompass = Math.min(8 - playerCompass, effect.count)
     if (!addedCompass) return []

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { BorealRules } from '@gamepark/boreal/BorealRules'
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
@@ -12,7 +11,7 @@ import WhitePanelBG from '../images/panel/white_player.jpg'
 import Compass from '../images/tokens/compass.jpg'
 import VictoryPoint from '../images/tokens/victory-point.png'
 
-export const PlayerPanels: FC<any> = () => {
+export const PlayerPanels: FC = () => {
   const playerId = usePlayerId()
   const rules = useRules<BorealRules>()!
   const players = usePlayers({ sortFromMe: true })
@@ -29,7 +28,7 @@ export const PlayerPanels: FC<any> = () => {
       {players.map((player) => {
           const mainCounter = !isEnded ? {
             image: Compass,
-            value: '+' + new PyramidHelper(rules.game, player.id).restBonus ?? 0,
+            value: '+' + new PyramidHelper(rules.game, player.id).restBonus,
             imageCss: css`border-radius: 5em;`
           } : {
             image: VictoryPoint,

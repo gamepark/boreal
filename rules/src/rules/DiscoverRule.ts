@@ -1,6 +1,6 @@
 import { isMoveItemType, isSelectItemType, isStartRule, ItemMove, Material, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
-import { isArchive } from '../material/Card'
-import { Cards } from '../material/CardDescription'
+import { CardId, isArchive } from '../material/Card'
+import { getCardDescription } from '../material/CardDescription'
 import { LocationType } from '../material/LocationType'
 import { MaterialType } from '../material/MaterialType'
 import { PlayerColor } from '../PlayerColor'
@@ -47,8 +47,8 @@ export class DiscoverRule extends PlayerTurnRule {
   }
 
   getPaymentMoves(move: MoveItem) {
-    const item = this.material(MaterialType.Card).getItem(move.itemIndex)
-    const cost = Cards[item.id.front].cost ?? 0
+    const item = this.material(MaterialType.Card).getItem<CardId>(move.itemIndex)
+    const cost = getCardDescription(item.id.front).cost ?? 0
     if (!cost) return []
     return this
       .material(MaterialType.ExplorationToken)
@@ -62,8 +62,8 @@ export class DiscoverRule extends PlayerTurnRule {
   getPlaceMoves(cards: Material) {
     const moves: MaterialMove[] = []
     for (const cardIndex of cards.getIndexes()) {
-      const item = cards.getItem(cardIndex)
-      const description = Cards[item.id.front]
+      const item = cards.getItem<CardId>(cardIndex)
+      const description = getCardDescription(item.id.front)
       const cost = description.cost ?? 0
       if (!this.canBeBought(cost, item)) continue
 
@@ -100,7 +100,7 @@ export class DiscoverRule extends PlayerTurnRule {
     return this
       .material(MaterialType.Card)
       .location(LocationType.BoardCard)
-      .filter((item) => !hasArchive || !isArchive(item.id.front))
+      .filter<CardId>((item) => !hasArchive || !isArchive(item.id.front!))
   }
 
   get reserveCards() {
@@ -114,7 +114,7 @@ export class DiscoverRule extends PlayerTurnRule {
     return this
       .material(MaterialType.Card)
       .player(this.player)
-      .id(({ front }: any) => front && isArchive(front))
+      .id(({ front }: CardId) => !!front && isArchive(front))
       .length === 1
   }
 

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { BorealRules } from '@gamepark/boreal/BorealRules'
 import { LocationType } from '@gamepark/boreal/material/LocationType'

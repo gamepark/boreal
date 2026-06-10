@@ -555,3 +555,5 @@ export const Cards: Partial<Record<Card, CardDescription>> = {
   [Card.Archive8]: Archive8,
 }
 
+export const getCardDescription = (front?: Card): CardDescription => (front !== undefined && Cards[front]) || {}
+

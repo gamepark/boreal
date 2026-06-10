@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { TokenDescription } from '@gamepark/react-game'
 import BlackPanelBG from '../images/panel/black_player.jpg'

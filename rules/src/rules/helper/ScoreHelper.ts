@@ -1,6 +1,7 @@
 import { Material, MaterialGame, MaterialRulesPart } from '@gamepark/rules-api'
-import sum from 'lodash/sum'
-import { Cards } from '../../material/CardDescription'
+import { sum } from 'es-toolkit'
+import { CardId } from '../../material/Card'
+import { getCardDescription } from '../../material/CardDescription'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { VictoryPointType } from '../../material/VictoryPointCondition'
@@ -23,8 +24,8 @@ export class ScoreHelper extends MaterialRulesPart {
 
   }
 
-  getCardScore(card: Material) {
-    const victoryPointEffect = Cards[card.getItem()!.id.front].victoryPointEffect
+  getCardScore(card: Material): number {
+    const victoryPointEffect = getCardDescription(card.getItem<CardId>()!.id.front).victoryPointEffect
     if (!victoryPointEffect) return 0
     switch (victoryPointEffect.type) {
       case VictoryPointType.Brut:
@@ -40,13 +41,13 @@ export class ScoreHelper extends MaterialRulesPart {
       case VictoryPointType.PerFamilySet:
         return new PerFamilySetRule(this.game, card).score
       case VictoryPointType.LeftCard:
-        return new LeftCardRule(this.game, card).score
+        return new LeftCardRule(this.game, card, (c) => this.getCardScore(c)).score
       case VictoryPointType.RightCard:
-        return new RightCardRule(this.game, card).score
+        return new RightCardRule(this.game, card, (c) => this.getCardScore(c)).score
       case VictoryPointType.Step:
         return new StepRule(this.game, card).score
       case VictoryPointType.CardUnder:
-        return new CardUnderRule(this.game, card).score
+        return new CardUnderRule(this.game, card, (c) => this.getCardScore(c)).score
       case VictoryPointType.Adjacent:
         return new AdjacentRule(this.game, card).score
     }

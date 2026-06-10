@@ -1,6 +1,5 @@
 import { LeftCard } from '../../../material/VictoryPointCondition'
 import { isAdjacent } from '../../utils/adjacent'
-import { ScoreHelper } from '../ScoreHelper'
 import { VictoryPointEffectRule } from './VictoryPointEffectRule'
 
 export class CardUnderRule extends VictoryPointEffectRule<LeftCard> {
@@ -9,7 +8,7 @@ export class CardUnderRule extends VictoryPointEffectRule<LeftCard> {
     const cards = this.cardsUnder
     let maxScore = 0
     for (const cardIndex of cards.getIndexes()) {
-      const score = new ScoreHelper(this.game, this.player).getCardScore(cards.index(cardIndex))
+      const score = this.scoreCard!(cards.index(cardIndex))
       if (score > maxScore) maxScore = score
     }
 

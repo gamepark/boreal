@@ -1,4 +1,5 @@
-import { Cards } from '../../../material/CardDescription'
+import { CardId } from '../../../material/Card'
+import { getCardDescription } from '../../../material/CardDescription'
 import { LocationType } from '../../../material/LocationType'
 import { MaterialType } from '../../../material/MaterialType'
 import { PerFamily } from '../../../material/VictoryPointCondition'
@@ -16,6 +17,6 @@ export class PerFamilyRule extends VictoryPointEffectRule<PerFamily> {
       .material(MaterialType.Card)
       .location(LocationType.Pyramid)
       .player(this.player)
-      .filter((item) => Cards[item.id.front].families?.includes(this.effect.family))
+      .filter<CardId>((item) => !!getCardDescription(item.id.front).families?.includes(this.effect.family))
   }
 }

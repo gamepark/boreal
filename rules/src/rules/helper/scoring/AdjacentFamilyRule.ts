@@ -1,4 +1,5 @@
-import { Cards } from '../../../material/CardDescription'
+import { CardId } from '../../../material/Card'
+import { getCardDescription } from '../../../material/CardDescription'
 import { LocationType } from '../../../material/LocationType'
 import { MaterialType } from '../../../material/MaterialType'
 import { AdjacentFamily } from '../../../material/VictoryPointCondition'
@@ -17,10 +18,10 @@ export class AdjacentFamilyRule extends VictoryPointEffectRule<AdjacentFamily> {
       .material(MaterialType.Card)
       .location(LocationType.Pyramid)
       .player(this.player)
-      .filter((item, index) => {
+      .filter<CardId>((item, index) => {
           return index !== this.card.getIndex()
             && isAdjacent(item.location, this.item.location)
-            && Cards[item.id.front]!.families?.includes(this.effect.family)
+            && !!getCardDescription(item.id.front).families?.includes(this.effect.family)
         }
       )
   }

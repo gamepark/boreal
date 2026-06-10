@@ -1,19 +1,15 @@
-/** @jsxImportSource @emotion/react */
 import { BorealOptionsSpec } from '@gamepark/boreal/BorealOptions'
 import { BorealRules } from '@gamepark/boreal/BorealRules'
 import { BorealSetup } from '@gamepark/boreal/BorealSetup'
-import { GameProvider, MaterialGameAnimations, setupTranslation } from '@gamepark/react-game'
+import { GameProvider, MaterialGameAnimations } from '@gamepark/react-game'
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import { createRoot } from 'react-dom/client'
+import { App } from './App'
 import { Locators } from './locators/Locators'
 import { Material } from './material/Material'
-import translations from './translations.json'
 import { Tutorial } from './tutorial/Tutorial'
 
-setupTranslation(translations, { debug: false })
-
-ReactDOM.render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GameProvider
       game="boreal"
@@ -25,8 +21,7 @@ ReactDOM.render(
       animations={new MaterialGameAnimations()}
       tutorial={new Tutorial()}
     >
-      <App/>
+      <App />
     </GameProvider>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 )

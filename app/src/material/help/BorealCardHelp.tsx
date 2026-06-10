@@ -1,8 +1,7 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { BorealRules } from '@gamepark/boreal/BorealRules'
 import { CardBack, CardFamily, isArchive } from '@gamepark/boreal/material/Card'
-import { CardDescription, Cards } from '@gamepark/boreal/material/CardDescription'
+import { CardDescription, getCardDescription } from '@gamepark/boreal/material/CardDescription'
 import { Effect, EffectType, isOpponentLooseCompass, isWinCompassEffect } from '@gamepark/boreal/material/CardEffect'
 import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
@@ -38,13 +37,13 @@ const VisibleBorealCardHelp: FC<MaterialHelpProps> = (props) => {
   const { item } = props
   const { t } = useTranslation()
   if (item.id.front === undefined) return null
-  const description: CardDescription = Cards[item.id.front]
+  const description: CardDescription = getCardDescription(item.id.front)
 
   return (
     <>
       {isArchive(item.id.front) && (
         <p>
-          <Trans defaults="help.card.archive.limit">
+          <Trans i18nKey="help.card.archive.limit">
             <strong/>
             <Picture src={archive} css={[inlineIcon, css`filter: drop-shadow(0em 0em 0.05em black) drop-shadow(0em 0em 0.05em black)`]}/>
           </Trans>
@@ -54,12 +53,12 @@ const VisibleBorealCardHelp: FC<MaterialHelpProps> = (props) => {
         <p css={familyIconsCss}>
           <span>{t(description.families?.length === 1 ? 'help.card.family' : 'help.card.families')}</span>
           {description.families.map((f: CardFamily) => (
-            <span key={f} css={iconCss(familyIcons[f])}/>
+            <span key={f} css={iconCss(familyIcons[f]!)}/>
           ))}
         </p>
       )}
       <p css={textWithIconCss}>
-        <Trans defaults="help.card.cost" values={{ cost: description.cost ?? 0 }}>
+        <Trans i18nKey="help.card.cost" values={{ cost: description.cost ?? 0 }}>
           <span css={iconCss(Compass)}/>
         </Trans>
       </p>
@@ -68,7 +67,7 @@ const VisibleBorealCardHelp: FC<MaterialHelpProps> = (props) => {
       )}
       {description.restBonus !== undefined && (
         <p css={textWithIconCss}>
-          <Trans defaults="help.card.income" values={{ compass: description.restBonus ?? 0 }}>
+          <Trans i18nKey="help.card.income" values={{ compass: description.restBonus ?? 0 }}>
             <span css={iconCss(Compass)}/>
           </Trans>
         </p>
@@ -110,7 +109,7 @@ const DeckLocation: FC<MaterialHelpProps> = ({ item }) => {
   if (item.location?.type !== LocationType.Deck) return null
   const deckLength = rules.material(MaterialType.Card).location(LocationType.Deck).length
   return (
-    <Trans defaults="help.draw.size" values={{ number: deckLength }}/>
+    <Trans i18nKey="help.draw.size" values={{ number: deckLength }}/>
   )
 }
 
@@ -119,7 +118,7 @@ const DestroyedLocation: FC<MaterialHelpProps> = ({ item }) => {
   if (item.location?.type !== LocationType.Destroyed) return null
   const deckLength = rules.material(MaterialType.Card).location(LocationType.Deck).length
   return (
-    <Trans defaults="help.card.destroyed" values={{ number: deckLength }}/>
+    <Trans i18nKey="help.card.destroyed" values={{ number: deckLength }}/>
   )
 }
 
@@ -133,12 +132,12 @@ const ReserveLocation: FC<MaterialHelpProps> = (props) => {
   if (me && player === me) {
     return <>
       <hr/>
-      <Trans defaults="help.card.reserve.you"/></>
+      <Trans i18nKey="help.card.reserve.you"/></>
   }
 
   return <>
     <hr/>
-    <Trans defaults="help.card.reserve.player" values={{ player: name }}/></>
+    <Trans i18nKey="help.card.reserve.player" values={{ player: name }}/></>
 }
 
 const PyramidLocation: FC<MaterialHelpProps> = ({ item }) => {
@@ -150,81 +149,81 @@ const PyramidLocation: FC<MaterialHelpProps> = ({ item }) => {
   if (me && player === me) {
     return <>
       <hr/>
-      <Trans defaults="help.card.pyramid.you"/></>
+      <Trans i18nKey="help.card.pyramid.you"/></>
   }
 
   return <>
     <hr/>
-    <Trans defaults="help.card.pyramid.player" values={{ player: name }}/></>
+    <Trans i18nKey="help.card.pyramid.player" values={{ player: name }}/></>
 }
 
 const getVictoryPointText = (effect: VictoryPointEffects) => {
   switch (effect.type) {
     case VictoryPointType.Brut:
       return (
-        <Trans defaults="help.card.points.raw" values={{ points: effect.points }}>
+        <Trans i18nKey="help.card.points.raw" values={{ points: effect.points }}>
           <strong/>
         </Trans>
       )
     case VictoryPointType.PerFamily:
       return (
-        <Trans defaults="help.card.points.family">
+        <Trans i18nKey="help.card.points.family">
           <strong/>
-          <span css={iconCss(familyIcons[effect.family])}/>
+          <span css={iconCss(familyIcons[effect.family]!)}/>
         </Trans>
       )
     case VictoryPointType.AdjacentFamily:
       return (
-        <Trans defaults="help.card.points.family.adjacent">
+        <Trans i18nKey="help.card.points.family.adjacent">
           <strong/>
-          <span css={iconCss(familyIcons[effect.family])}/>
+          <span css={iconCss(familyIcons[effect.family]!)}/>
         </Trans>
       )
     case VictoryPointType.Adjacent:
       return (
-        <Trans defaults="help.card.points.adjacent">
+        <Trans i18nKey="help.card.points.adjacent">
           <strong/>
         </Trans>
       )
     case VictoryPointType.AdjacentDifferentFamily:
       return (
-        <Trans defaults="help.card.points.families.adjacent">
+        <Trans i18nKey="help.card.points.families.adjacent">
           <strong/>
         </Trans>
       )
     case VictoryPointType.FamilyMajority:
       return (
-        <Trans defaults="help.card.points.families.majority">
+        <Trans i18nKey="help.card.points.families.majority">
           <strong/>
         </Trans>
       )
     case VictoryPointType.PerFamilySet:
       return (
-        <Trans defaults="help.card.points.families.collection">
+        <Trans i18nKey="help.card.points.families.collection">
           <strong/>
         </Trans>
       )
     case VictoryPointType.LeftCard:
       return (
-        <Trans defaults="help.card.points.left">
+        <Trans i18nKey="help.card.points.left">
           <strong/>
         </Trans>
       )
     case VictoryPointType.RightCard:
       return (
-        <Trans defaults="help.card.points.right">
+        <Trans i18nKey="help.card.points.right">
           <strong/>
         </Trans>
       )
     case VictoryPointType.CardUnder:
       return (
-        <Trans defaults="help.card.points.under">
+        <Trans i18nKey="help.card.points.under">
           <strong/>
         </Trans>
       )
     case VictoryPointType.Step:
       return (
-        <Trans defaults="help.card.points.floor">
+        <Trans i18nKey="help.card.points.floor">
           <strong/>
         </Trans>
       )
@@ -233,13 +232,13 @@ const getVictoryPointText = (effect: VictoryPointEffects) => {
 
 const getEffectText = (effect: Effect) => {
   if (isOpponentLooseCompass(effect)) {
-    return <Trans defaults="help.card.effect.compass.lose" values={{ number: effect.count }}>
+    return <Trans i18nKey="help.card.effect.compass.lose" values={{ number: effect.count }}>
       <span css={redCss}/>
       <span css={iconCss(Compass)}/>
     </Trans>
   }
   if (isWinCompassEffect(effect)) {
-    return <Trans defaults="help.card.effect.compass.gain" values={{ number: effect.count }}>
+    return <Trans i18nKey="help.card.effect.compass.gain" values={{ number: effect.count }}>
       <strong/>
       <span css={iconCss(Compass)}/>
     </Trans>
@@ -247,27 +246,27 @@ const getEffectText = (effect: Effect) => {
 
   switch (effect.type) {
     case EffectType.Pick:
-      return <Trans defaults="help.card.effect.draw-pick">
+      return <Trans i18nKey="help.card.effect.draw-pick">
         <strong/>
       </Trans>
     case EffectType.Remove:
-      return <Trans defaults="help.card.effect.remove">
+      return <Trans i18nKey="help.card.effect.remove">
         <strong/>
       </Trans>
     case EffectType.InvertBoardCards:
-      return <Trans defaults="help.card.effect.invert.board">
+      return <Trans i18nKey="help.card.effect.invert.board">
         <strong/>
       </Trans>
     case EffectType.InvertPyramidCards:
-      return <Trans defaults="help.card.effect.invert.pyramid">
+      return <Trans i18nKey="help.card.effect.invert.pyramid">
         <strong/>
       </Trans>
     case EffectType.WinCompass:
-      return <Trans defaults="help.card.effect.compass.gain">
+      return <Trans i18nKey="help.card.effect.compass.gain">
         <strong/>
       </Trans>
     case EffectType.Reserve:
-      return <Trans defaults="help.card.effect.pick">
+      return <Trans i18nKey="help.card.effect.pick">
         <strong/>
       </Trans>
 
@@ -289,7 +288,7 @@ const getCardTitle = (item: Partial<MaterialItem>) => {
   return 'help.card.start'
 }
 
-const familyIcons = {
+const familyIcons: Partial<Record<CardFamily, string>> = {
   [CardFamily.Red]: RedIcon,
   [CardFamily.Green]: GreenIcon,
   [CardFamily.Yellow]: YellowIcon,
@@ -329,6 +328,6 @@ const iconCss = (icon: string) => css`
   height: 1.4em;
   width: 1.4em;
   margin-left: 0.3em;
-  ${shadowCss(icon)}
+  ${shadowCss}
 `
 

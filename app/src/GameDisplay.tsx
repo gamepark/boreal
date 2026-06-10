@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { GameTable } from '@gamepark/react-game'
 import { FC } from 'react'
 import { PlayerPanels } from './panels/PlayerPanels'

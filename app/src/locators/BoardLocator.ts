@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { PlayerColor } from '@gamepark/boreal/PlayerColor'
 import { Locator, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
