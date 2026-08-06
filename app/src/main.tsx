@@ -1,4 +1,4 @@
-import { BorealOptionsSpec } from '@gamepark/boreal/BorealOptions'
+import { BorealOptionsSpecV2 } from '@gamepark/boreal/BorealOptions'
 import { BorealRules } from '@gamepark/boreal/BorealRules'
 import { BorealSetup } from '@gamepark/boreal/BorealSetup'
 import { GameProvider, MaterialGameAnimations } from '@gamepark/react-game'
@@ -14,7 +14,7 @@ createRoot(document.getElementById('root')!).render(
     <GameProvider
       game="boreal"
       Rules={BorealRules}
-      optionsSpec={BorealOptionsSpec}
+      optionsSpec={BorealOptionsSpecV2}
       GameSetup={BorealSetup}
       material={Material}
       locators={Locators}

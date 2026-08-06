@@ -1,3 +1,3 @@
 export { BorealRules } from './BorealRules'
-export { BorealOptionsSpec } from './BorealOptions'
+export { BorealOptionsSpecV2 } from './BorealOptions'
 export { BorealSetup } from './BorealSetup'
