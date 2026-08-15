@@ -1,4 +1,5 @@
-import { GameTable } from '@gamepark/react-game'
+import { pointerWithin } from '@dnd-kit/core'
+import { DevToolsHub, GameTable } from '@gamepark/react-game'
 import { FC } from 'react'
 import { PlayerPanels } from './panels/PlayerPanels'
 
@@ -14,9 +15,11 @@ export const GameDisplay: FC<GameDisplayProps> = () => {
       yMin={-30}
       yMax={20}
       margin={{ top: 6.5, left: 0, right: 0, bottom: 0 }}
+      collisionAlgorithm={pointerWithin}
       //css={css`background-color: rgba(255, 255, 255, 0.5)`}
     >
       <PlayerPanels/>
+      {process.env.NODE_ENV === 'development' && <DevToolsHub fabBottom="calc(5em)"/>}
     </GameTable>
   </>
 }
