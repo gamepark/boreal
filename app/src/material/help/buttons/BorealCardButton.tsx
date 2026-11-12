@@ -4,7 +4,7 @@ import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { MaterialHelpProps, PlayMoveButton, useLegalMove, useRules } from '@gamepark/react-game'
 import { isMoveItemType } from '@gamepark/rules-api'
-import equal from 'fast-deep-equal'
+import { isEqual } from 'es-toolkit'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -53,7 +53,7 @@ const InverseCardButton: FC<MaterialHelpProps> = (props) => {
   const { t } = useTranslation()
   const rules = useRules<BorealRules>()!
   const selectedItem = rules.material(MaterialType.Card).selected()
-  const move = useLegalMove((move) => isMoveItemType(MaterialType.Card)(move) && (move.location?.type === LocationType.Pyramid || move.location?.type === LocationType.BoardCard) && equal(item.location, move.location) && move.itemIndex === selectedItem.getIndex())
+  const move = useLegalMove((move) => isMoveItemType(MaterialType.Card)(move) && (move.location?.type === LocationType.Pyramid || move.location?.type === LocationType.BoardCard) && isEqual(item.location, move.location) && move.itemIndex === selectedItem.getIndex())
 
   if (!move || item.selected) return null
 

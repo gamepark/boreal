@@ -3,7 +3,7 @@ import { LocationType } from '@gamepark/boreal/material/LocationType'
 import { MaterialType } from '@gamepark/boreal/material/MaterialType'
 import { DropAreaDescription, LocationContext, MaterialContext } from '@gamepark/react-game'
 import { isMoveItemType, Location, MaterialMove } from '@gamepark/rules-api'
-import equal from 'fast-deep-equal'
+import { isEqual } from 'es-toolkit'
 
 export class PyramidDescription extends DropAreaDescription {
 
@@ -20,7 +20,7 @@ export class PyramidDescription extends DropAreaDescription {
     if (!isMoveItemType(MaterialType.Card)(move)) return false
     if (move.location.type === LocationType.Pyramid) {
       const selected = !!rules.material(MaterialType.Card).getItem(move.itemIndex).selected
-      return selected && equal(location, move.location)
+      return selected && isEqual(location, move.location)
     }
     return false
   }
